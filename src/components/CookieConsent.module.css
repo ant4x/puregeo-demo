@@ -1,0 +1,95 @@
+.banner {
+  position: fixed;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 22px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px -22px rgba(15, 14, 12, 0.3);
+}
+
+.text {
+  font-size: var(--text-xs);
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+}
+
+.link {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.link:hover {
+  color: var(--color-accent);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.accept,
+.decline {
+  padding: 9px 18px;
+  border-radius: 99px;
+  font-family: var(--font-inter);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: filter 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.accept {
+  border: none;
+  background: var(--color-accent);
+  color: var(--color-card);
+}
+
+.accept:hover {
+  filter: brightness(0.92);
+}
+
+.decline {
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-ink-muted);
+}
+
+.decline:hover {
+  border-color: var(--color-ink-faint);
+  color: var(--color-ink);
+}
+
+@media (max-width: 640px) {
+  .banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px 18px;
+  }
+  .text {
+    text-align: center;
+  }
+  .actions {
+    justify-content: center;
+  }
+  .accept,
+  .decline {
+    flex: 1;
+  }
+}

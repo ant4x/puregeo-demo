@@ -1,0 +1,214 @@
+.section {
+  width: 100%;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: var(--gap-section) 64px var(--gap-section);
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 44px;
+  margin-bottom: 56px;
+}
+
+.headLogo {
+  width: auto;
+  height: 168px;
+  flex-shrink: 0;
+}
+
+.headText {
+  max-width: 560px;
+}
+
+.eyebrow {
+  font-size: var(--text-overline);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-family: var(--font-playfair);
+  font-size: var(--text-h1);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  color: var(--color-ink);
+  margin-bottom: 18px;
+}
+
+.title em {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+.sub {
+  max-width: 540px;
+  font-size: var(--text-lead);
+  line-height: 1.7;
+  color: var(--color-ink-muted);
+}
+
+/* — Layout: form left, contact cards stacked right — */
+.layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 28px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--color-ink);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -20px rgba(15, 14, 12, 0.18);
+}
+
+.cardTg:hover {
+  border-color: var(--color-telegram);
+}
+
+.cardWa:hover {
+  border-color: var(--color-whatsapp);
+}
+
+.cardPh:hover {
+  border-color: var(--color-accent);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  color: var(--color-card);
+}
+
+.iconTg {
+  background: var(--color-telegram);
+}
+
+.iconWa {
+  background: var(--color-whatsapp);
+}
+
+.iconPh {
+  background: var(--color-accent);
+}
+
+.icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.label {
+  margin-bottom: 4px;
+  font-size: var(--text-overline);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.value {
+  font-family: var(--font-playfair);
+  font-size: var(--text-h4);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.arrow {
+  flex-shrink: 0;
+  color: var(--color-ink-faint);
+  transition: transform 0.2s, color 0.2s;
+}
+
+.arrow svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.card:hover .arrow {
+  transform: translateX(4px);
+  color: var(--color-ink);
+}
+
+@media (max-width: 1100px) {
+  .section {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 960px) {
+  .head {
+    flex-direction: column;
+    gap: 28px;
+    text-align: center;
+  }
+  .headLogo {
+    height: 132px;
+  }
+  .headText {
+    max-width: 100%;
+  }
+  .sub {
+    margin: 0 auto;
+  }
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .headLogo {
+    height: 112px;
+  }
+  .card {
+    padding: 20px 18px;
+    gap: 14px;
+  }
+}

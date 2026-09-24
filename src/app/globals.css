@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #f24c40;
+  --color-accent-hero: #DA291C;
+  --color-panel: #202f18;
+  --color-surface: #f7f5f1;
+  --color-ink: #343d49;
+  --color-ink-muted: #6b6560;
+  --color-ink-faint: #9a9490;
+  --color-border: #e2ddd7;
+  --color-card: #ffffff;
+  --color-telegram: #0088cc;
+  --color-whatsapp: #25d366;
+
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-inter);
+}
+
+:root {
+  --gap-section: 96px;
+
+  /* Type scale — Lora for display/headings, Golos Text for everything else */
+  --text-display: clamp(2.75rem, 6.5vw, 4.25rem); /* Hero H1 — 44 → 68px */
+  --text-h1: clamp(2.125rem, 5vw, 3rem); /* Section hero — 34 → 48px */
+  --text-h2: clamp(1.75rem, 3.6vw, 2.25rem); /* Section heading — 28 → 36px */
+  --text-h3: clamp(1.5rem, 2.8vw, 1.75rem); /* Block / card heading — 24 → 28px */
+  --text-h4: 1.25rem; /* Subheading, name, value — 20px */
+  --text-lead: 1.125rem; /* Lead paragraph, subtitle — 18px */
+  --text-body: 1rem; /* Body — 16px */
+  --text-sm: 0.875rem; /* Secondary text, captions — 14px */
+  --text-xs: 0.8125rem; /* Fine print, dates — 13px */
+  --text-overline: 0.6875rem; /* Eyebrow, tag, tiny label — 11px */
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --gap-section: 72px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --gap-section: 48px;
+  }
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
