@@ -8,9 +8,15 @@ import heroTop from "@/assets/puregeo-hero-1.jpg";
 const RADIUS_DESKTOP = 280;
 const RADIUS_TOUCH = 180;
 
+type GestureMode = "idle" | "scroll" | "reveal";
+
 export default function Hero() {
   const maskLayerRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const lastTouchTimeRef = useRef(0);
+  const touchStartPosRef = useRef<{ x: number; y: number } | null>(null);
+  const touchHoldTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const gestureModeRef = useRef<GestureMode>("idle");
 
   const applyReveal = useCallback((x: number, y: number, radius: number) => {
     const gradient = `radial-gradient(circle at ${x}px ${y}px, transparent ${radius * 0.72}px, black ${radius}px)`;
@@ -21,6 +27,10 @@ export default function Hero() {
   }, []);
 
   const clearReveal = useCallback(() => {
+    if (touchHoldTimerRef.current) {
+      clearTimeout(touchHoldTimerRef.current);
+      touchHoldTimerRef.current = null;
+    }
     if (maskLayerRef.current) {
       maskLayerRef.current.style.maskImage = "none";
       maskLayerRef.current.style.webkitMaskImage = "none";
@@ -32,6 +42,8 @@ export default function Hero() {
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
+      if (Date.now() - lastTouchTimeRef.current < 600) return;
+
       const rect = e.currentTarget.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -44,39 +56,99 @@ export default function Hero() {
     [applyReveal],
   );
 
-  const handleTouchMove = useCallback(
+  const handleTouchStart = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
-      e.preventDefault();
+      lastTouchTimeRef.current = Date.now();
       const touch = e.touches[0];
       const rect = e.currentTarget.getBoundingClientRect();
       const x = touch.clientX - rect.left;
       const y = touch.clientY - rect.top;
-      applyReveal(x, y, RADIUS_TOUCH);
+
+      touchStartPosRef.current = { x: touch.clientX, y: touch.clientY };
+      gestureModeRef.current = "idle";
+
+      if (touchHoldTimerRef.current) clearTimeout(touchHoldTimerRef.current);
+      touchHoldTimerRef.current = setTimeout(() => {
+        gestureModeRef.current = "reveal";
+        applyReveal(x, y, RADIUS_TOUCH);
+      }, 140);
     },
     [applyReveal],
   );
 
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      lastTouchTimeRef.current = Date.now();
+      const touch = e.touches[0];
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+
+      // Once locked into reveal mode, track the finger everywhere without interruption
+      if (gestureModeRef.current === "reveal") {
+        applyReveal(x, y, RADIUS_TOUCH);
+        return;
+      }
+
+      // Once locked into scroll mode, let native page scrolling proceed
+      if (gestureModeRef.current === "scroll") {
+        return;
+      }
+
+      // Detect initial gesture direction
+      const start = touchStartPosRef.current;
+      if (start) {
+        const dx = Math.abs(touch.clientX - start.x);
+        const dy = Math.abs(touch.clientY - start.y);
+
+        if (dx > 6 || dy > 6) {
+          if (touchHoldTimerRef.current) {
+            clearTimeout(touchHoldTimerRef.current);
+            touchHoldTimerRef.current = null;
+          }
+
+          if (dy > dx) {
+            gestureModeRef.current = "scroll";
+            clearReveal();
+          } else {
+            gestureModeRef.current = "reveal";
+            applyReveal(x, y, RADIUS_TOUCH);
+          }
+        }
+      }
+    },
+    [applyReveal, clearReveal],
+  );
+
   const handleTouchEnd = useCallback(() => {
+    lastTouchTimeRef.current = Date.now();
+    touchStartPosRef.current = null;
+    gestureModeRef.current = "idle";
     clearReveal();
   }, [clearReveal]);
 
   return (
     <section
       id="hero"
-      className="relative h-screen overflow-hidden md:cursor-none select-none"
+      className="relative h-[100svh] min-h-[100svh] overflow-hidden md:cursor-none select-none"
+      style={{ touchAction: "pan-y" }}
       onMouseMove={handleMouseMove}
       onMouseLeave={clearReveal}
+      onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
+      onDragStart={(e) => e.preventDefault()}
     >
       {/* Bottom layer: vivid green */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         <Image
           src={heroBottom}
           alt="Green mountains of Georgia"
           fill
           sizes="100vw"
-          className="object-cover"
+          className="object-cover pointer-events-none select-none"
+          draggable={false}
           loading="eager"
           fetchPriority="low"
           placeholder="blur"
@@ -84,13 +156,21 @@ export default function Hero() {
       </div>
 
       {/* Top layer: overcast landscape with mask */}
-      <div ref={maskLayerRef} className="absolute inset-0">
+      <div
+        ref={maskLayerRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          willChange: "mask-image, -webkit-mask-image",
+          transform: "translateZ(0)",
+        }}
+      >
         <Image
           src={heroTop}
           alt="Mountains of Georgia"
           fill
           sizes="100vw"
-          className="object-cover"
+          className="object-cover pointer-events-none select-none"
+          draggable={false}
           preload
           placeholder="blur"
         />
