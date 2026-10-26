@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 import heroBottom from "@/assets/puregeo-hero-2.webp";
 import heroTop from "@/assets/puregeo-hero-1.webp";
@@ -20,6 +20,10 @@ export default function Hero() {
   const touchStartPosRef = useRef<{ x: number; y: number } | null>(null);
   const touchHoldTimerRef = useRef<NodeJS.Timeout | null>(null);
   const gestureModeRef = useRef<GestureMode>("idle");
+
+  useEffect(() => {
+    setLoadBottom(true);
+  }, []);
 
   const applyReveal = useCallback((x: number, y: number, radius: number) => {
     if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
@@ -63,6 +67,7 @@ export default function Hero() {
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (Date.now() - lastTouchTimeRef.current < 600) return;
+      setLoadBottom(true);
 
       const rect = heroRectRef.current ?? e.currentTarget.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -159,7 +164,7 @@ export default function Hero() {
       onTouchCancel={handleTouchEnd}
       onDragStart={(e) => e.preventDefault()}
     >
-      {/* Bottom layer: vivid green (deferred to idle or interaction) */}
+      {/* Bottom layer: vivid green */}
       <div className="absolute inset-0 pointer-events-none">
         {loadBottom && (
           <Image
@@ -169,8 +174,9 @@ export default function Hero() {
             sizes="100vw"
             className="object-cover pointer-events-none select-none"
             draggable={false}
-            loading="lazy"
-            fetchPriority="low"
+            loading="eager"
+            placeholder="blur"
+            quality={60}
           />
         )}
       </div>
