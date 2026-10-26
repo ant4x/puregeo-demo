@@ -189,7 +189,7 @@ export default function Hero() {
             draggable={false}
             loading="lazy"
             fetchPriority="low"
-            quality={60}
+            unoptimized
             onLoad={() => {
               bottomLoadedRef.current = true;
             }}
@@ -210,7 +210,7 @@ export default function Hero() {
           className="object-cover pointer-events-none select-none"
           draggable={false}
           priority
-          quality={60}
+          unoptimized
         />
       </div>
 
