@@ -250,10 +250,11 @@ export default function Header() {
         aria-label="Navigation menu"
         className={`fixed inset-0 z-40 flex flex-col justify-between bg-surface/95 px-6 pt-24 pb-8 backdrop-blur-2xl transition-all duration-300 ease-out md:hidden ${
           menuOpen
-            ? "pointer-events-auto opacity-100 translate-y-0"
-            : "pointer-events-none opacity-0 -translate-y-3"
+            ? "pointer-events-auto opacity-100 translate-y-0 visible"
+            : "pointer-events-none opacity-0 -translate-y-3 invisible"
         }`}
         aria-hidden={!menuOpen}
+        inert={!menuOpen ? true : undefined}
       >
         <nav className="flex flex-col gap-y-1">
           {NAV_LINKS.map((link) => (
