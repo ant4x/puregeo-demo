@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   description:
     "Wildflower Retreats is a fictional demo site: small-group slow travel weeks on the Black Sea coast of Georgia.",
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
   alternates: {
     canonical: "./",
   },
