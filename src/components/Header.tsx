@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import { askDemoContact } from "./prefill";
@@ -47,6 +48,7 @@ function NavLink({
 }
 
 export default function Header() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -105,7 +107,7 @@ export default function Header() {
       document.body.style.overflow = "";
     }
     closeMenu();
-    if (href === "/#hero" || href === "#hero") {
+    if (pathname === "/" && (href === "/#hero" || href === "#hero")) {
       e.preventDefault();
       scrollToTop();
     }
@@ -116,8 +118,10 @@ export default function Header() {
       document.body.style.overflow = "";
     }
     closeMenu();
-    e.preventDefault();
-    scrollToTop();
+    if (pathname === "/") {
+      e.preventDefault();
+      scrollToTop();
+    }
   };
 
   return (
@@ -139,7 +143,7 @@ export default function Header() {
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- bare <a> so the
               anchor re-scrolls to #hero on every click (next/link short-circuits on same URL) */}
           <a
-            href="/#hero"
+            href="/"
             onClick={handleLogoClick}
             className="flex items-center gap-2.5 text-ink"
             aria-label="Wildflower Retreats — home"
