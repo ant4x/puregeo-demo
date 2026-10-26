@@ -55,7 +55,7 @@ export default async function OpengraphImage() {
           </div>
           <div style={{ fontFamily, fontSize: 34, color: "#6b6560", display: "flex", gap: 10 }}>
             <span>Slow travel weeks</span>
-            <span style={{ color: "#f24c40" }}>on the Georgian coast</span>
+            <span style={{ color: "#DA291C" }}>on the Georgian coast</span>
           </div>
         </div>
       </div>
