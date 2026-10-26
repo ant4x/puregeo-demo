@@ -182,7 +182,6 @@ export default function Header() {
               alt=""
               width={40}
               height={42}
-              priority
               unoptimized
               className="h-9 w-auto"
             />
@@ -227,7 +226,6 @@ export default function Header() {
               alt=""
               width={40}
               height={42}
-              priority
               unoptimized
               className="h-9 w-auto"
             />
