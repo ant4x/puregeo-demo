@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 import heroBottom from "@/assets/puregeo-hero-2.webp";
 import heroTop from "@/assets/puregeo-hero-1.webp";
@@ -11,6 +11,7 @@ const RADIUS_TOUCH = 180;
 type GestureMode = "idle" | "scroll" | "reveal";
 
 export default function Hero() {
+  const [loadBottom, setLoadBottom] = useState(false);
   const maskLayerRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const heroRectRef = useRef<DOMRect | null>(null);
@@ -19,6 +20,18 @@ export default function Hero() {
   const touchStartPosRef = useRef<{ x: number; y: number } | null>(null);
   const touchHoldTimerRef = useRef<NodeJS.Timeout | null>(null);
   const gestureModeRef = useRef<GestureMode>("idle");
+
+  useEffect(() => {
+    if ("requestIdleCallback" in window) {
+      const handle = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
+        () => setLoadBottom(true),
+        { timeout: 2000 }
+      );
+      return () => (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(handle);
+    }
+    const timer = setTimeout(() => setLoadBottom(true), 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   const applyReveal = useCallback((x: number, y: number, radius: number) => {
     if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
@@ -55,6 +68,7 @@ export default function Hero() {
   }, []);
 
   const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    setLoadBottom(true);
     heroRectRef.current = e.currentTarget.getBoundingClientRect();
   }, []);
 
@@ -72,6 +86,7 @@ export default function Hero() {
 
   const handleTouchStart = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
+      setLoadBottom(true);
       lastTouchTimeRef.current = Date.now();
       const touch = e.touches[0];
       const rect = e.currentTarget.getBoundingClientRect();
@@ -156,29 +171,26 @@ export default function Hero() {
       onTouchCancel={handleTouchEnd}
       onDragStart={(e) => e.preventDefault()}
     >
-      {/* Bottom layer: vivid green */}
+      {/* Bottom layer: vivid green (deferred to idle or interaction) */}
       <div className="absolute inset-0 pointer-events-none">
-        <Image
-          src={heroBottom}
-          alt="Green mountains of Georgia"
-          fill
-          sizes="100vw"
-          className="object-cover pointer-events-none select-none"
-          draggable={false}
-          loading="lazy"
-          fetchPriority="low"
-          placeholder="blur"
-        />
+        {loadBottom && (
+          <Image
+            src={heroBottom}
+            alt="Green mountains of Georgia"
+            fill
+            sizes="100vw"
+            className="object-cover pointer-events-none select-none"
+            draggable={false}
+            loading="lazy"
+            fetchPriority="low"
+          />
+        )}
       </div>
 
       {/* Top layer: overcast landscape with mask */}
       <div
         ref={maskLayerRef}
         className="absolute inset-0 pointer-events-none"
-        style={{
-          willChange: "mask-image, -webkit-mask-image",
-          transform: "translateZ(0)",
-        }}
       >
         <Image
           src={heroTop}
@@ -188,7 +200,6 @@ export default function Hero() {
           className="object-cover pointer-events-none select-none"
           draggable={false}
           priority
-          placeholder="blur"
         />
       </div>
 

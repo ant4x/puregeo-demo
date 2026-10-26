@@ -24,7 +24,7 @@ export default function Camp() {
               alt="The Black Sea coast near Batumi"
               fill
               sizes="(max-width: 960px) 100vw, 520px"
-              placeholder="blur"
+              loading="lazy"
             />
             <div className={styles.introBadge}>Kvariati, Adjara</div>
           </div>
@@ -76,7 +76,7 @@ export default function Camp() {
               alt="A swim in an infinity pool above the sea"
               fill
               sizes="(max-width: 960px) 100vw, 420px"
-              placeholder="blur"
+              loading="lazy"
             />
           </div>
           <div className={styles.whyMain}>

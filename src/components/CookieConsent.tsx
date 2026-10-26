@@ -17,7 +17,12 @@ export default function CookieConsent() {
         setVisible(false);
       }
     };
-    init();
+    if ("requestIdleCallback" in window) {
+      const id = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(init, { timeout: 1500 });
+      return () => (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(id);
+    }
+    const timer = setTimeout(init, 800);
+    return () => clearTimeout(timer);
   }, []);
 
   function decide(value: "accepted" | "declined") {
