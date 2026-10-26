@@ -4,7 +4,6 @@ import Image from "next/image";
 import styles from "./Camp.module.css";
 import imgSummer from "@/assets/summer.jpg";
 import imgSummer2 from "@/assets/summer-2.jpg";
-import { askAboutShift } from "./prefill";
 
 const PROGRAMS = [
   {
@@ -111,39 +110,6 @@ const DISCOUNTS = [
   { pct: "−5%", text: "Travelling with a friend" },
 ];
 
-interface Shift {
-  num: string;
-  dates: string;
-  name: string;
-  desc: string;
-}
-
-const SHIFTS: Shift[] = [
-  {
-    num: "01",
-    dates: "May 10 – 17",
-    name: "Spring in Bloom",
-    desc: "Blossoming gardens, empty beaches and the first warm swims. The quietest week of the season.",
-  },
-  {
-    num: "02",
-    dates: "Jun 21 – 28",
-    name: "Longest Days",
-    desc: "Midsummer light, late sunsets on the boulevard and long evenings on the terrace.",
-  },
-  {
-    num: "03",
-    dates: "Aug 9 – 16",
-    name: "Sea & Mountains",
-    desc: "Peak of summer: the sea at its warmest, with cool mornings up in the Adjara mountains.",
-  },
-  {
-    num: "04",
-    dates: "Sep 20 – 27",
-    name: "Rtveli Harvest",
-    desc: "The grape harvest season. Pick grapes, press wine and join a family feast in the village.",
-  },
-];
 
 const WHY = [
   "Groups of no more than twelve",
@@ -368,32 +334,6 @@ export default function Camp() {
           </div>
         </div>
 
-        {/* Departures */}
-        <div id="shifts" className={styles.shifts}>
-          <div className={styles.sectionHead}>
-            <h3 className={styles.sectionH2}>Departures</h3>
-            <div className={styles.sectionNote}>
-              Four weeks a year, each with its own mood. Pick a date and ask us anything about
-              it.
-            </div>
-          </div>
-
-          <div className={styles.shiftsGrid}>
-            {SHIFTS.map((s) => (
-              <a
-                key={s.num}
-                href="#contact-form"
-                className={styles.shift}
-                onClick={() => askAboutShift(s.name, s.dates)}
-              >
-                <div className={styles.shiftNum}>{s.num}</div>
-                <div className={styles.shiftDates}>{s.dates}</div>
-                <div className={styles.shiftName}>{s.name}</div>
-                <div className={styles.shiftDesc}>{s.desc}</div>
-              </a>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
