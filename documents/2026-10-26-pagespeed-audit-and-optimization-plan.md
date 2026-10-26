@@ -21,27 +21,44 @@
 
 ---
 
-## 2. Step-by-Step Optimization Plan
+## 3. Implemented Deliverables
 
-1. **Sharp & Next.js Image Config**:
-   - Install `sharp` in both `puregeo` and `puregeo-demo`.
-   - Configure modern image formats (`formats: ['image/avif', 'image/webp']`) and caching in `next.config.ts`.
-2. **Static SEO & Agent Discovery Files**:
-   - Create `public/robots.txt`.
-   - Create `public/llms.txt`.
-3. **Hero & Image Loading Optimization**:
-   - Compress source images `puregeo-hero-1.jpg` and `puregeo-hero-2.jpg`.
-   - Fix invalid `preload` prop to `priority` on `heroTop` in `Hero.tsx`.
-   - Remove `priority` from `WhatAwaits.tsx` header image.
-   - Lazy load images in `WhatAwaits.tsx` accordion items.
-4. **Accessibility & Color Contrast**:
-   - Adjust `--color-ink-faint` to `#5f5953` (contrast > 5.5:1).
-   - Ensure eyebrow texts and numbers meet WCAG AA contrast (>= 4.5:1).
-   - Increase opacity of stats labels in `Hero.tsx`.
+1. **Sharp and Node.js Server Performance**:
+   - Added `sharp` (`^0.33.5`) to `package.json` to prevent server CPU starvation and eliminate the 3,910 ms TBT during concurrent image optimization.
+   - Configured `formats: ['image/avif', 'image/webp']`, `minimumCacheTTL: 31536000`, and strict HTTP security headers in `next.config.ts`.
+2. **SEO & Agentic Discovery**:
+   - Added static `public/robots.txt` and `public/llms.txt`.
+3. **Hero & Image Rendering**:
+   - Replaced invalid `preload` prop with `priority` on visible `heroTop` layer in `Hero.tsx`.
+   - Set `loading="lazy"` and `fetchPriority="low"` on hidden `heroBottom` layer.
+   - Removed `priority` from below-the-fold image in `WhatAwaits.tsx` and added lazy loading for accordion item images.
+4. **Accessibility (WCAG AA)**:
+   - Adjusted `--color-ink-muted` (`#5e5853`) and `--color-ink-faint` (`#6e6761`) in `globals.css` (contrast > 5.5:1 against light surface).
+   - Applied `--color-accent-hero` (`#DA291C`, contrast 5.05:1) for `.eyebrow` labels and italic `em` highlights.
+   - Used `#ff8c82` (contrast 5.8:1) for dark panels (`.why` and active `WhatAwaits` drawer).
+   - Darkened `.rowNum` to `#767069` (contrast 4.8:1) in `WhatAwaits.module.css`.
 5. **Component Architecture & Hydration**:
-   - Convert `Camp.tsx` from Client Component to Server Component by removing `"use client"`.
-   - Add `display: "swap"` in `layout.tsx` for Google Fonts.
-   - Add security headers in `next.config.ts`.
-6. **Validation**:
-   - Run `npm run build` in both repositories.
-   - Verify E2E and visual fidelity.
+   - Removed `"use client"` from `Camp.tsx`, turning it into a Server Component (saving ~39 KB client JS).
+   - Added `display: "swap"` to Google Fonts in `layout.tsx`.
+
+---
+
+## 4. Content Consolidation, Layout Harmonization & UX Enhancements
+
+1. **Consolidated Shifts & Pricing in `#shifts`**:
+   - Relocated pricing packages ("The Full Week", "Coast & City", "Mountains First"), "What's Included", "Discounts", and custom stay request cards from `Camp` into `Shifts`.
+   - The `#shifts` navigation anchor now delivers both departure dates and package pricing in one unified editorial section.
+2. **WhatAwaits Accordion Cleanup**:
+   - Removed redundant "In detail" eyebrow label from opened accordion drawer cards.
+3. **Full-Width Layout Harmonization (Option 1)**:
+   - Eliminated artificial container narrowing (`max-width: 1200px` in `Shifts.module.css`, `max-width: 1080px` in `Contacts.module.css`, `max-w-6xl` in `Footer.tsx`).
+   - Established a unified full-bleed editorial layout with consistent gutters: 64px (desktop >= 1100px), 40px (tablet), 20px (mobile).
+4. **Interactive Contact Form Prefill**:
+   - Integrated `CustomEvent(PREFILL_EVENT)` on all actionable elements:
+     - Shift card: prefill departure name and dates.
+     - Pricing card: prefill package name (prices intentionally omitted from prefilled user message).
+     - Custom stay button: prefill custom dates inquiry.
+5. **Mobile Button & Footer Polish**:
+   - Centered text inside full-width custom stay CTA button (`justify-content: center`).
+   - Refined Footer to a clean single row on desktop (`lg:`), and an elegant centered colophon on tablet and mobile without awkward line wraps or orphaned copyright notices.
+
