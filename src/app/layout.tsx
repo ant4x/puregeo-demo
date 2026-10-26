@@ -8,12 +8,14 @@ import CookieConsent from "@/components/CookieConsent";
 const golos = Golos_Text({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const lora = Lora({
   variable: "--font-playfair",
   subsets: ["latin"],
   style: ["normal", "italic"],
+  display: "swap",
 });
 
 const SITE_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL

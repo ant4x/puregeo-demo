@@ -7,8 +7,6 @@
 
 .wrap {
   width: 100%;
-  max-width: 1080px;
-  margin: 0 auto;
 }
 
 .head {
@@ -33,7 +31,7 @@
   font-size: var(--text-overline);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-hero);
   font-weight: 500;
   margin-bottom: 20px;
 }
@@ -49,7 +47,7 @@
 }
 
 .title em {
-  color: var(--color-accent);
+  color: var(--color-accent-hero);
   font-style: italic;
 }
 

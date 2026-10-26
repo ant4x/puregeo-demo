@@ -12,7 +12,7 @@
   font-size: var(--text-overline);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-hero);
   font-weight: 500;
   margin-bottom: 20px;
 }
@@ -85,7 +85,7 @@
 }
 
 .title em {
-  color: var(--color-accent);
+  color: var(--color-accent-hero);
   font-style: italic;
 }
 
@@ -615,7 +615,7 @@
   font-size: var(--text-overline);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: #ff8c82;
   font-weight: 500;
   margin-bottom: 18px;
 }
