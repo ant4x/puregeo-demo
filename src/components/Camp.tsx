@@ -226,6 +226,7 @@ export default function Camp() {
                 <div className={styles.programDesc}>{p.desc}</div>
                 <div className={styles.programPrice}>
                   <div className={styles.programPriceVal}>{p.price}</div>
+                  <div className={styles.programPriceSub}>package: 1 child + 1 adult (20 nights)</div>
                 </div>
               </div>
             </a>
