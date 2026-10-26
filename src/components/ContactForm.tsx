@@ -102,8 +102,8 @@ export default function ContactForm() {
         <label className={`${styles.field} ${styles.fieldWide}`}>
           <div className="flex items-center justify-between">
             <span className={styles.label}>Question</span>
-            {question.includes("Demonstration Site") && (
-              <span className="text-[11px] font-medium text-accent-hero">Demo notice prefilled</span>
+            {question.includes("demo site") && (
+              <span className="text-[11px] font-medium text-accent-hero">Demo notice</span>
             )}
           </div>
           <textarea
