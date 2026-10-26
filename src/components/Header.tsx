@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css";
 import { askDemoContact } from "./prefill";
 
-const SERIF = { fontFamily: "var(--font-playfair)" } as const;
+const SERIF = { fontFamily: "var(--font-display)" } as const;
 
 const NAV_LINKS = [
   { href: "/#hero", label: "Home" },
@@ -41,15 +42,24 @@ export default function Header() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const hero = document.getElementById("hero");
-    const update = () => {
-      setVisible(hero ? window.scrollY > hero.offsetHeight * 0.85 : true);
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    if (!hero) {
+      const timer = setTimeout(() => setVisible(true), 0);
+      return () => clearTimeout(timer);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setVisible(entry.intersectionRatio < 0.15);
+      },
+      { threshold: [0, 0.15] }
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -79,6 +89,42 @@ export default function Header() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // Focus trap for mobile menu
+  useEffect(() => {
+    if (!menuOpen || !mobileMenuRef.current) return;
+    const focusable = mobileMenuRef.current.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length > 0) {
+      focusable[0]?.focus();
+    }
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || !mobileMenuRef.current) return;
+      const elements = mobileMenuRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (elements.length === 0) return;
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          last?.focus();
+          e.preventDefault();
+        }
+      } else {
+        if (document.activeElement === last) {
+          first?.focus();
+          e.preventDefault();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleTab);
+    return () => window.removeEventListener("keydown", handleTab);
+  }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -125,7 +171,7 @@ export default function Header() {
       >
         {/* Mobile Header bar */}
         <div className="flex items-center justify-between px-6 py-2.5 md:hidden">
-          <a
+          <Link
             href="/"
             onClick={handleLogoClick}
             className="flex items-center gap-2.5 text-ink shrink-0"
@@ -143,7 +189,7 @@ export default function Header() {
             <span style={SERIF} className="text-lg leading-none font-medium tracking-tight whitespace-nowrap">
               Wildflower Retreats
             </span>
-          </a>
+          </Link>
 
           {/* Animated Hamburger / Cross toggle button */}
           <button
@@ -170,7 +216,7 @@ export default function Header() {
           </nav>
 
           {/* Center Logo -> Home */}
-          <a
+          <Link
             href="/"
             onClick={handleLogoClick}
             className="flex items-center justify-center gap-2.5 text-ink shrink-0 px-4 transition-opacity hover:opacity-85"
@@ -188,7 +234,7 @@ export default function Header() {
             <span style={SERIF} className="text-xl font-medium tracking-tight whitespace-nowrap">
               Wildflower Retreats
             </span>
-          </a>
+          </Link>
 
           {/* Right 2 Links */}
           <nav className="flex items-center justify-center gap-x-8 lg:gap-x-10">
@@ -200,6 +246,10 @@ export default function Header() {
 
       {/* Full-screen Mobile Menu Overlay */}
       <div
+        ref={mobileMenuRef}
+        role="dialog"
+        aria-modal={menuOpen}
+        aria-label="Navigation menu"
         className={`fixed inset-0 z-40 flex flex-col justify-between bg-surface/95 px-6 pt-24 pb-8 backdrop-blur-2xl transition-all duration-300 ease-out md:hidden ${
           menuOpen
             ? "pointer-events-auto opacity-100 translate-y-0"

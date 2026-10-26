@@ -6,13 +6,13 @@ import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 
 const golos = Golos_Text({
-  variable: "--font-inter",
+  variable: "--font-golos",
   subsets: ["latin"],
   display: "swap",
 });
 
 const lora = Lora({
-  variable: "--font-playfair",
+  variable: "--font-lora",
   subsets: ["latin"],
   style: ["normal", "italic"],
   display: "swap",
@@ -31,6 +31,9 @@ export const metadata: Metadata = {
   description:
     "Wildflower Retreats is a fictional demo site: small-group slow travel weeks on the Black Sea coast of Georgia.",
   robots: { index: false, follow: false },
+  alternates: {
+    canonical: "./",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -52,7 +55,7 @@ export default function RootLayout({
       lang="en"
       className={`${golos.variable} ${lora.variable} h-full antialiased motion-safe:scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col font-[var(--font-inter)]">
+      <body className="min-h-full flex flex-col font-[var(--font-body)]">
         <Header />
         {children}
         <Footer />

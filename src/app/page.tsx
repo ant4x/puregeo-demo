@@ -16,9 +16,41 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://puregeo-demo.vercel.app/#organization",
+      name: "Wildflower Retreats",
+      url: "https://puregeo-demo.vercel.app",
+      logo: "https://puregeo-demo.vercel.app/assets/logotulip.svg",
+      description: "Small-group slow travel weeks on the Black Sea coast of Georgia.",
+    },
+    {
+      "@type": "TouristTrip",
+      "@id": "https://puregeo-demo.vercel.app/#retreat",
+      name: "Wildflower Retreats Slow Travel Week in Batumi",
+      description:
+        "Seven slow days on the Georgian Black Sea coast for groups of up to 12: sea swims, mountain canyons, spa evenings, supra dinners and qvevri wine.",
+      touristType: "Adults",
+      offers: {
+        "@type": "Offer",
+        price: "1450",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <main className="flex-1">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Hero />
       <Camp />
       <WhatAwaits />

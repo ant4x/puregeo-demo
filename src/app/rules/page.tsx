@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const SERIF = { fontFamily: "var(--font-playfair)" } as const;
+const SERIF = { fontFamily: "var(--font-display)" } as const;
 
 export const metadata: Metadata = {
   title: "Privacy policy",

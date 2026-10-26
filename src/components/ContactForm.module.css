@@ -21,7 +21,7 @@
 }
 
 .title {
-  font-family: var(--font-playfair);
+  font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 600;
   letter-spacing: -0.015em;
@@ -67,7 +67,7 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 10px;
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   font-size: var(--text-body);
   color: var(--color-ink);
   transition: border-color 0.2s, background 0.2s;
@@ -139,7 +139,7 @@
   border-radius: 99px;
   background: var(--color-accent);
   color: var(--color-card);
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   font-size: var(--text-xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -167,7 +167,7 @@
 }
 
 .doneTitle {
-  font-family: var(--font-playfair);
+  font-family: var(--font-display);
   font-size: var(--text-h3);
   font-weight: 600;
   color: var(--color-ink);
@@ -188,7 +188,7 @@
   border-radius: 99px;
   background: transparent;
   color: var(--color-ink);
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   font-size: var(--text-xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;

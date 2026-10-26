@@ -11,10 +11,7 @@ import img4 from "@/assets/4-food.jpg";
 import img5 from "@/assets/5-locals.jpg";
 import img6 from "@/assets/6-cities.jpg";
 
-/* ── Palette (from Tweaks) ── */
-const PANEL_BG = "#202f18";
-const ACCENT = "#f24c40";
-const SECTION_BG = "#f7f5f1";
+
 
 /* ── Data ── */
 interface Activity {
@@ -147,12 +144,21 @@ function ActivityRow({
   return (
     <div
       className={`${styles.row} ${isOpen ? styles.rowOpen : ""}`}
+      role="button"
+      tabIndex={0}
+      aria-expanded={isOpen}
       onClick={onToggle}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onToggle();
+        }
+      }}
     >
       {/* Row header */}
       <div
         className={styles.rowHeader}
-        style={isOpen ? { background: PANEL_BG } : undefined}
+        style={isOpen ? { background: "var(--color-panel)" } : undefined}
       >
         <span className={styles.rowNum}>{activity.num}</span>
 
@@ -185,7 +191,7 @@ function ActivityRow({
       {/* Accordion panel */}
       <div className={`${styles.panelWrap} ${isOpen ? styles.panelWrapOpen : ""}`}>
         <div className={styles.panelInner}>
-          <div className={styles.panel} style={{ background: PANEL_BG }}>
+          <div className={styles.panel} style={{ background: "var(--color-panel)" }}>
             {/* Image */}
             <div className={styles.panelImgWrap}>
               <Image
@@ -235,7 +241,7 @@ export default function WhatAwaits() {
     setOpenId((prev) => (prev === id ? null : id));
 
   return (
-    <section id="offer" className={styles.section} style={{ background: SECTION_BG }}>
+    <section id="offer" className={styles.section} style={{ background: "var(--color-surface)" }}>
       {/* Header */}
       <div className={styles.header}>
         <div className={styles.headerImg}>

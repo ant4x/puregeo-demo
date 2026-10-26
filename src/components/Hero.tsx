@@ -130,6 +130,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
+      aria-label="Slow down in Georgia - Wildflower Retreats"
       className="relative h-screen h-[100lvh] min-h-[100lvh] overflow-hidden md:cursor-none select-none"
       style={{ touchAction: "pan-y" }}
       onMouseMove={handleMouseMove}
@@ -197,7 +198,7 @@ export default function Hero() {
         <div className="px-6 pb-8 sm:pb-12 md:pb-0 md:px-12 lg:px-20 max-w-2xl space-y-4 sm:space-y-5 md:space-y-7 pointer-events-auto text-center md:text-left w-full">
           <h1
             className="font-bold text-stone-100 leading-[1.05] tracking-tight"
-            style={{ fontFamily: "var(--font-playfair)", fontSize: "var(--text-display)" }}
+            style={{ fontFamily: "var(--font-display)", fontSize: "var(--text-display)" }}
           >
             Slow down in{" "}
             <span
