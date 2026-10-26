@@ -195,7 +195,7 @@ function ActivityRow({
                 className={`${styles.panelImg} ${isOpen ? styles.panelImgOpen : ""}`}
                 sizes="(max-width: 768px) 100vw, 640px"
                 placeholder="blur"
-                loading="eager"
+                loading="lazy"
               />
               <div className={styles.panelImgOverlay} />
             </div>
