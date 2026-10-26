@@ -149,7 +149,7 @@ export default function Hero() {
           sizes="100vw"
           className="object-cover pointer-events-none select-none"
           draggable={false}
-          loading="eager"
+          loading="lazy"
           fetchPriority="low"
           placeholder="blur"
         />
@@ -171,7 +171,7 @@ export default function Hero() {
           sizes="100vw"
           className="object-cover pointer-events-none select-none"
           draggable={false}
-          preload
+          priority
           placeholder="blur"
         />
       </div>
@@ -232,7 +232,7 @@ export default function Hero() {
                 <div className="text-lg sm:text-xl md:text-2xl font-bold text-stone-100 leading-none">
                   {value}
                 </div>
-                <div className="text-[10px] sm:text-xs text-stone-100/50 tracking-wide">
+                <div className="text-[10px] sm:text-xs text-stone-100/85 tracking-wide">
                   {label}
                 </div>
               </div>
@@ -242,7 +242,7 @@ export default function Hero() {
           <div className="flex pt-1 justify-center md:justify-start">
             <a
               href="#camp"
-              className="px-6 md:px-8 py-3 md:py-3.5 border border-white/35 hover:border-white/70 hover:bg-white/10 text-stone-100 text-xs tracking-[0.14em] uppercase rounded-full transition-colors backdrop-blur-sm"
+              className="px-6 md:px-8 py-3 md:py-3.5 border border-white/40 hover:border-white/75 hover:bg-white/10 text-stone-100 text-xs tracking-[0.14em] uppercase rounded-full transition-colors backdrop-blur-sm"
             >
               About the retreat
             </a>
@@ -252,14 +252,14 @@ export default function Hero() {
 
       {/* Mobile hint */}
       <div className="md:hidden absolute top-5 left-1/2 -translate-x-1/2 pointer-events-none">
-        <span className="px-3 py-1.5 border border-white/30 text-stone-100/55 text-[9px] tracking-[0.18em] uppercase rounded-full backdrop-blur-sm whitespace-nowrap">
+        <span className="px-3 py-1.5 border border-white/40 text-stone-100/90 text-[9px] tracking-[0.18em] uppercase rounded-full backdrop-blur-sm whitespace-nowrap">
           Swipe across the photo
         </span>
       </div>
 
       {/* Desktop hint */}
       <div className="hidden md:block absolute bottom-6 right-6 pointer-events-none">
-        <span className="px-5 py-2 border border-white/35 text-stone-100/70 text-xs tracking-[0.2em] uppercase rounded-full backdrop-blur-sm whitespace-nowrap">
+        <span className="px-5 py-2 border border-white/40 text-stone-100/90 text-xs tracking-[0.2em] uppercase rounded-full backdrop-blur-sm whitespace-nowrap">
           Move your cursor over the photo
         </span>
       </div>

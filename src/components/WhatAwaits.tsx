@@ -193,16 +193,14 @@ function ActivityRow({
                 alt={activity.name}
                 fill
                 className={`${styles.panelImg} ${isOpen ? styles.panelImgOpen : ""}`}
-                sizes="640px"
+                sizes="(max-width: 768px) 100vw, 640px"
+                loading="lazy"
               />
               <div className={styles.panelImgOverlay} />
             </div>
 
             {/* Content */}
             <div className={`${styles.panelContent} ${isOpen ? styles.panelContentOpen : ""}`}>
-              <div className={styles.panelEyebrow} style={{ color: ACCENT }}>
-                In detail
-              </div>
               <h3 className={styles.panelTitle}>{activity.panelTitle}</h3>
               <p className={styles.panelBody}>{activity.panelBody}</p>
               <ul className={styles.panelItems}>
@@ -245,20 +243,19 @@ export default function WhatAwaits() {
             alt="Batumi seen from the sea"
             fill
             className={styles.headerImgEl}
-            priority
-            sizes="640px"
+            sizes="(max-width: 768px) 100vw, 640px"
           />
           <div className={styles.headerImgOverlay} />
         </div>
 
         <div className={styles.headerText}>
-          <p className={styles.eyebrow} style={{ color: ACCENT }}>
+          <p className={styles.eyebrow} style={{ color: "var(--color-accent-hero)" }}>
             The week
           </p>
           <h2 className={styles.title}>
             A sea
             <br />
-            <em style={{ color: ACCENT }}>of small</em>
+            <em style={{ color: "var(--color-accent-hero)" }}>of small</em>
             <br />
             pleasures
           </h2>

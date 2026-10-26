@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://puregeo-demo.vercel.app/sitemap.xml
