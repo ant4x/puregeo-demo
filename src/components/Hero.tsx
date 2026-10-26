@@ -130,7 +130,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative h-[100dvh] min-h-[100dvh] overflow-hidden md:cursor-none select-none"
+      className="relative h-screen h-[100lvh] min-h-[100lvh] overflow-hidden md:cursor-none select-none"
       style={{ touchAction: "pan-y" }}
       onMouseMove={handleMouseMove}
       onMouseLeave={clearReveal}
