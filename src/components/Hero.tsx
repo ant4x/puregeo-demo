@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useState, useEffect } from "react";
+import { useRef, useCallback, useState } from "react";
 import Image from "next/image";
 import heroBottom from "@/assets/puregeo-hero-2.webp";
 import heroTop from "@/assets/puregeo-hero-1.webp";
@@ -20,18 +20,6 @@ export default function Hero() {
   const touchStartPosRef = useRef<{ x: number; y: number } | null>(null);
   const touchHoldTimerRef = useRef<NodeJS.Timeout | null>(null);
   const gestureModeRef = useRef<GestureMode>("idle");
-
-  useEffect(() => {
-    if ("requestIdleCallback" in window) {
-      const handle = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
-        () => setLoadBottom(true),
-        { timeout: 2000 }
-      );
-      return () => (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(handle);
-    }
-    const timer = setTimeout(() => setLoadBottom(true), 1200);
-    return () => clearTimeout(timer);
-  }, []);
 
   const applyReveal = useCallback((x: number, y: number, radius: number) => {
     if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
@@ -200,6 +188,7 @@ export default function Hero() {
           className="object-cover pointer-events-none select-none"
           draggable={false}
           priority
+          quality={70}
         />
       </div>
 
