@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image, { type StaticImageData } from "next/image";
 import styles from "./WhatAwaits.module.css";
 import imgHeader from "@/assets/0-sea.webp";
@@ -141,12 +141,20 @@ function ActivityRow({
   isOpen: boolean;
   onToggle: () => void;
 }) {
+  const handleMouseEnter = () => {
+    if (typeof window !== "undefined") {
+      const img = new window.Image();
+      img.src = activity.img.src;
+    }
+  };
+
   return (
     <div
       className={`${styles.row} ${isOpen ? styles.rowOpen : ""}`}
       role="button"
       tabIndex={0}
       aria-expanded={isOpen}
+      onMouseEnter={handleMouseEnter}
       onClick={onToggle}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
@@ -236,6 +244,28 @@ function ActivityRow({
 export default function WhatAwaits() {
   const [openId, setOpenId] = useState<number | null>(null);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const el = document.getElementById("offer");
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          ACTIVITIES.forEach((a) => {
+            const img = new window.Image();
+            img.src = a.img.src;
+          });
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "600px 0px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const toggle = (id: number) =>
     setOpenId((prev) => (prev === id ? null : id));
 
@@ -255,7 +285,7 @@ export default function WhatAwaits() {
         </div>
 
         <div className={styles.headerText}>
-          <p className={styles.eyebrow} style={{ color: "var(--color-accent-hero)" }}>
+          <p className={styles.eyebrow}>
             The week
           </p>
           <h2 className={styles.title}>

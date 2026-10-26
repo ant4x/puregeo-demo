@@ -22,8 +22,8 @@
   font-size: var(--text-overline);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-accent-hero);
-  font-weight: 500;
+  color: var(--color-accent-text, #b81d13);
+  font-weight: 600;
   margin-bottom: 14px;
 }
 
