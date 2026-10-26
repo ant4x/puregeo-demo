@@ -18,6 +18,7 @@
 }
 
 :root {
+  scroll-padding-top: 4.5rem;
   --gap-section: 96px;
 
   /* Type scale — Lora for display/headings, Golos Text for everything else */

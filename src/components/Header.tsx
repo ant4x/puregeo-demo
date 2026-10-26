@@ -6,21 +6,21 @@ import { useEffect, useState } from "react";
 const SERIF = { fontFamily: "var(--font-playfair)" } as const;
 
 const LEFT_LINKS = [
-  { href: "/#hero", label: "Главная" },
-  { href: "/#camp", label: "Лагерь" },
+  { href: "/#hero", label: "Home" },
+  { href: "/#camp", label: "The retreat" },
 ];
 
 const RIGHT_LINKS = [
-  { href: "/#offer", label: "Что мы предлагаем" },
-  { href: "/#contacts", label: "Контакты" },
+  { href: "/#offer", label: "The week" },
+  { href: "/#contacts", label: "Contact" },
 ];
 
 const ALL_MOBILE_LINKS = [
-  { href: "/#hero", label: "Главная" },
-  { href: "/#camp", label: "О лагере" },
-  { href: "/#offer", label: "Что мы предлагаем" },
-  { href: "/#shifts", label: "Смены и цены" },
-  { href: "/#contacts", label: "Контакты" },
+  { href: "/#hero", label: "Home" },
+  { href: "/#camp", label: "The retreat" },
+  { href: "/#offer", label: "The week" },
+  { href: "/#shifts", label: "Dates & booking" },
+  { href: "/#contacts", label: "Contact" },
 ];
 
 function NavLink({ href, label }: { href: string; label: string }) {
@@ -79,6 +79,16 @@ export default function Header() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const handleNavClick = (href: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+    closeMenu();
+    if (href === "/#hero" || href === "#hero") {
+      if (typeof window !== "undefined") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <>
       <header
@@ -99,9 +109,9 @@ export default function Header() {
               anchor re-scrolls to #hero on every click (next/link short-circuits on same URL) */}
           <a
             href="/#hero"
-            onClick={closeMenu}
+            onClick={(e) => handleNavClick("/#hero", e)}
             className="flex items-center gap-2.5 text-ink"
-            aria-label="Страна Цветов — на главную"
+            aria-label="Wildflower Retreats — home"
           >
             <Image
               src="/assets/logotulip.svg"
@@ -113,7 +123,7 @@ export default function Header() {
               className="h-9 w-auto"
             />
             <span style={SERIF} className="text-lg leading-none md:text-xl">
-              Страна Цветов
+              Wildflower
             </span>
           </a>
 
@@ -123,29 +133,48 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Hamburger toggle button (mobile only) */}
+          {/* SVG Hamburger / Cross toggle button (immune to subpixel WebKit clipping) */}
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full p-2 text-ink transition-colors hover:text-accent-hero focus:outline-none md:hidden"
-            aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
+            className="relative z-50 flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors hover:text-accent-hero focus:outline-none md:hidden"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
-            <span
-              className={`h-0.5 w-6 rounded-full bg-current transition-transform duration-300 ease-out ${
-                menuOpen ? "translate-y-2 rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`h-0.5 w-6 rounded-full bg-current transition-opacity duration-200 ease-out ${
-                menuOpen ? "opacity-0" : "opacity-100"
-              }`}
-            />
-            <span
-              className={`h-0.5 w-6 rounded-full bg-current transition-transform duration-300 ease-out ${
-                menuOpen ? "-translate-y-2 -rotate-45" : ""
-              }`}
-            />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              className="transition-transform duration-200"
+            >
+              <line
+                x1={menuOpen ? "5" : "4"}
+                y1={menuOpen ? "5" : "7"}
+                x2={menuOpen ? "19" : "20"}
+                y2={menuOpen ? "19" : "7"}
+                className="transition-all duration-300 ease-out"
+              />
+              <line
+                x1="4"
+                y1="12"
+                x2="20"
+                y2="12"
+                className={`transition-opacity duration-200 ease-out ${
+                  menuOpen ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <line
+                x1={menuOpen ? "5" : "4"}
+                y1={menuOpen ? "19" : "17"}
+                x2={menuOpen ? "19" : "20"}
+                y2={menuOpen ? "5" : "17"}
+                className="transition-all duration-300 ease-out"
+              />
+            </svg>
           </button>
         </div>
       </header>
@@ -164,9 +193,9 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              onClick={closeMenu}
+              onClick={(e) => handleNavClick(link.href, e)}
               style={SERIF}
-              className="border-b border-border/40 py-3.5 text-2xl text-ink transition-colors active:text-accent-hero hover:text-accent-hero"
+              className="border-b border-border/40 py-3.5 text-2xl text-ink transition-opacity active:opacity-60"
             >
               {link.label}
             </a>
@@ -176,18 +205,17 @@ export default function Header() {
         <div className="flex flex-col gap-3 pt-6">
           <a
             href="/#shifts"
-            onClick={closeMenu}
+            onClick={(e) => handleNavClick("/#shifts", e)}
             className="w-full rounded-full bg-accent-hero px-6 py-3.5 text-center text-base font-medium text-white shadow-sm transition-transform active:scale-[0.98]"
           >
-            Забронировать смену
+            Book your retreat
           </a>
 
           <div className="grid grid-cols-2 gap-3 pt-1">
             <a
-              href="https://t.me/anton_thinks"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-full border border-border bg-white/70 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent-hero"
+              href="/#contacts"
+              onClick={(e) => handleNavClick("/#contacts", e)}
+              className="flex items-center justify-center gap-2 rounded-full border border-border bg-white/70 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent-hero active:opacity-70"
             >
               <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
                 <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" />
@@ -195,10 +223,9 @@ export default function Header() {
               Telegram
             </a>
             <a
-              href="https://wa.me/79681920299"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-full border border-border bg-white/70 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent-hero"
+              href="/#contacts"
+              onClick={(e) => handleNavClick("/#contacts", e)}
+              className="flex items-center justify-center gap-2 rounded-full border border-border bg-white/70 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent-hero active:opacity-70"
             >
               <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
                 <path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2.1-.4 0-.5 0-.1-.6-1.5-.8-2.1-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3s-.9.9-.9 2.2c0 1.3 1 2.5 1.1 2.7.1.2 1.9 2.9 4.6 4 1.6.7 2.3.8 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.4 5L2 22l5.2-1.4c1.5.8 3.1 1.3 4.8 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z" />
