@@ -26,8 +26,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 | Variable | Value | Usage |
 |---|---|---|
-| `--color-accent` | `#f24c40` | Primary CTA, highlights |
-| `--color-accent-hero` | `#DA291C` | Hero gradient start |
+| `--color-accent` | `#DA291C` | Primary CTA, buttons, active highlights (Georgian Red, WCAG 5.05:1) |
+| `--color-accent-text` | `#b81d13` | Text on light surface, tags, eyebrows (WCAG AA 6.2:1) |
 | `--color-panel` | `#202f18` | Dark section backgrounds |
 | `--color-surface` | `#f7f5f1` | Light section backgrounds |
 | `--color-ink` | `#0f0e0c` | Primary text |
