@@ -188,7 +188,7 @@ export default function Hero() {
           className="object-cover pointer-events-none select-none"
           draggable={false}
           priority
-          quality={70}
+          quality={60}
         />
       </div>
 
