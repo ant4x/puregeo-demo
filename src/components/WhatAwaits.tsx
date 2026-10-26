@@ -135,16 +135,21 @@ const ACTIVITIES: Activity[] = [
 function ActivityRow({
   activity,
   isOpen,
+  isReady,
   onToggle,
 }: {
   activity: Activity;
   isOpen: boolean;
+  isReady: boolean;
   onToggle: () => void;
 }) {
   const handleMouseEnter = () => {
     if (typeof window !== "undefined") {
       const img = new window.Image();
       img.src = activity.img.src;
+      if ("decode" in img) {
+        img.decode().catch(() => {});
+      }
     }
   };
 
@@ -206,9 +211,10 @@ function ActivityRow({
                 src={activity.img}
                 alt={activity.name}
                 fill
+                unoptimized
+                loading={isOpen || isReady ? "eager" : "lazy"}
                 className={`${styles.panelImg} ${isOpen ? styles.panelImgOpen : ""}`}
                 sizes="(max-width: 768px) 100vw, 640px"
-                loading="lazy"
               />
               <div className={styles.panelImgOverlay} />
             </div>
@@ -243,27 +249,53 @@ function ActivityRow({
 /* ── Main component ── */
 export default function WhatAwaits() {
   const [openId, setOpenId] = useState<number | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const el = document.getElementById("offer");
-    if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          ACTIVITIES.forEach((a) => {
-            const img = new window.Image();
-            img.src = a.img.src;
-          });
-          observer.disconnect();
+    const preloadAll = () => {
+      setIsReady(true);
+      ACTIVITIES.forEach((a) => {
+        const img = new window.Image();
+        img.src = a.img.src;
+        if ("decode" in img) {
+          img.decode().catch(() => {});
         }
-      },
-      { rootMargin: "600px 0px" }
-    );
+      });
+    };
 
-    observer.observe(el);
-    return () => observer.disconnect();
+    // Preload when user begins scrolling or touches the screen
+    const onUserInteraction = () => {
+      preloadAll();
+      window.removeEventListener("scroll", onUserInteraction);
+      window.removeEventListener("touchstart", onUserInteraction);
+    };
+
+    window.addEventListener("scroll", onUserInteraction, { passive: true, once: true });
+    window.addEventListener("touchstart", onUserInteraction, { passive: true, once: true });
+
+    // Also observe the offer section with generous margin
+    const el = document.getElementById("offer");
+    let observer: IntersectionObserver | null = null;
+    if (el) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            preloadAll();
+            observer?.disconnect();
+          }
+        },
+        { rootMargin: "800px 0px" }
+      );
+      observer.observe(el);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", onUserInteraction);
+      window.removeEventListener("touchstart", onUserInteraction);
+      observer?.disconnect();
+    };
   }, []);
 
   const toggle = (id: number) =>
@@ -309,6 +341,7 @@ export default function WhatAwaits() {
             key={a.id}
             activity={a}
             isOpen={openId === a.id}
+            isReady={isReady}
             onToggle={() => toggle(a.id)}
           />
         ))}
