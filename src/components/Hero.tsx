@@ -184,12 +184,12 @@ export default function Hero() {
             src={heroBottom}
             alt="Green mountains of Georgia"
             fill
-            sizes="100vw"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 75vw, 100vw"
             className="object-cover pointer-events-none select-none"
             draggable={false}
             loading="lazy"
             fetchPriority="low"
-            unoptimized
+            quality={60}
             onLoad={() => {
               bottomLoadedRef.current = true;
             }}
@@ -206,11 +206,11 @@ export default function Hero() {
           src={heroTop}
           alt="Mountains of Georgia"
           fill
-          sizes="100vw"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 75vw, 100vw"
           className="object-cover pointer-events-none select-none"
           draggable={false}
           priority
-          unoptimized
+          quality={60}
         />
       </div>
 
