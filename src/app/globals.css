@@ -18,7 +18,6 @@
 }
 
 :root {
-  scroll-padding-top: 4.5rem;
   --gap-section: 96px;
 
   /* Type scale — Lora for display/headings, Golos Text for everything else */
@@ -44,6 +43,10 @@
   :root {
     --gap-section: 48px;
   }
+}
+
+section:not(#hero) {
+  scroll-margin-top: 5rem;
 }
 
 body {

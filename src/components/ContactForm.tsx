@@ -15,6 +15,12 @@ export default function ContactForm() {
     const onPrefill = (e: Event) => {
       setQuestion((e as CustomEvent<string>).detail);
       setStatus("idle");
+      setTimeout(() => {
+        const el = document.getElementById("contact-question") as HTMLTextAreaElement | null;
+        if (el) {
+          el.focus();
+        }
+      }, 200);
     };
     window.addEventListener(PREFILL_EVENT, onPrefill);
     return () => window.removeEventListener(PREFILL_EVENT, onPrefill);
@@ -94,8 +100,14 @@ export default function ContactForm() {
         </label>
 
         <label className={`${styles.field} ${styles.fieldWide}`}>
-          <span className={styles.label}>Question</span>
+          <div className="flex items-center justify-between">
+            <span className={styles.label}>Question</span>
+            {question.includes("Demonstration Site") && (
+              <span className="text-[11px] font-medium text-accent-hero">Demo notice prefilled</span>
+            )}
+          </div>
           <textarea
+            id="contact-question"
             className={styles.textarea}
             name="question"
             required

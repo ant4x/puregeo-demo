@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import styles from "./Header.module.css";
+import { askDemoContact } from "./prefill";
 
 const SERIF = { fontFamily: "var(--font-playfair)" } as const;
 
@@ -80,11 +82,31 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false);
 
   const handleNavClick = (href: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "";
+    }
     closeMenu();
     if (href === "/#hero" || href === "#hero") {
       if (typeof window !== "undefined") {
         e.preventDefault();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        if (window.location.hash) {
+          window.history.replaceState(null, "", window.location.pathname);
+        }
+      }
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "";
+    }
+    closeMenu();
+    if (typeof window !== "undefined") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      if (window.location.hash) {
+        window.history.replaceState(null, "", window.location.pathname);
       }
     }
   };
@@ -109,7 +131,7 @@ export default function Header() {
               anchor re-scrolls to #hero on every click (next/link short-circuits on same URL) */}
           <a
             href="/#hero"
-            onClick={(e) => handleNavClick("/#hero", e)}
+            onClick={handleLogoClick}
             className="flex items-center gap-2.5 text-ink"
             aria-label="Wildflower Retreats — home"
           >
@@ -133,48 +155,19 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* SVG Hamburger / Cross toggle button (immune to subpixel WebKit clipping) */}
+          {/* Animated Hamburger / Cross toggle button */}
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="relative z-50 flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors hover:text-accent-hero focus:outline-none md:hidden"
+            className={`${styles.hamburger} ${menuOpen ? styles.open : ""}`}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              className="transition-transform duration-200"
-            >
-              <line
-                x1={menuOpen ? "5" : "4"}
-                y1={menuOpen ? "5" : "7"}
-                x2={menuOpen ? "19" : "20"}
-                y2={menuOpen ? "19" : "7"}
-                className="transition-all duration-300 ease-out"
-              />
-              <line
-                x1="4"
-                y1="12"
-                x2="20"
-                y2="12"
-                className={`transition-opacity duration-200 ease-out ${
-                  menuOpen ? "opacity-0" : "opacity-100"
-                }`}
-              />
-              <line
-                x1={menuOpen ? "5" : "4"}
-                y1={menuOpen ? "19" : "17"}
-                x2={menuOpen ? "19" : "20"}
-                y2={menuOpen ? "5" : "17"}
-                className="transition-all duration-300 ease-out"
-              />
-            </svg>
+            <div className={styles.hamburgerBox}>
+              <span className={`${styles.hamburgerLine} ${styles.line1}`} />
+              <span className={`${styles.hamburgerLine} ${styles.line2}`} />
+              <span className={`${styles.hamburgerLine} ${styles.line3}`} />
+            </div>
           </button>
         </div>
       </header>
@@ -213,8 +206,19 @@ export default function Header() {
 
           <div className="grid grid-cols-2 gap-3 pt-1">
             <a
-              href="/#contacts"
-              onClick={(e) => handleNavClick("/#contacts", e)}
+              href="#contact-form"
+              onClick={(e) => {
+                e.preventDefault();
+                if (typeof document !== "undefined") {
+                  document.body.style.overflow = "";
+                }
+                closeMenu();
+                askDemoContact("Telegram");
+                setTimeout(() => {
+                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                  setTimeout(() => document.getElementById("contact-question")?.focus(), 400);
+                }, 100);
+              }}
               className="flex items-center justify-center gap-2 rounded-full border border-border bg-white/70 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent-hero active:opacity-70"
             >
               <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -223,8 +227,19 @@ export default function Header() {
               Telegram
             </a>
             <a
-              href="/#contacts"
-              onClick={(e) => handleNavClick("/#contacts", e)}
+              href="#contact-form"
+              onClick={(e) => {
+                e.preventDefault();
+                if (typeof document !== "undefined") {
+                  document.body.style.overflow = "";
+                }
+                closeMenu();
+                askDemoContact("WhatsApp");
+                setTimeout(() => {
+                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                  setTimeout(() => document.getElementById("contact-question")?.focus(), 400);
+                }, 100);
+              }}
               className="flex items-center justify-center gap-2 rounded-full border border-border bg-white/70 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent-hero active:opacity-70"
             >
               <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">

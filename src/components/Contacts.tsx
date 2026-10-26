@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./Contacts.module.css";
 import ContactForm from "./ContactForm";
+import { askDemoContact } from "./prefill";
 
 const ArrowIcon = () => (
   <svg
@@ -49,9 +52,13 @@ export default function Contacts() {
           <div className={styles.cards}>
           <a
             className={`${styles.card} ${styles.cardTg}`}
-            href="https://telegram.org"
-            target="_blank"
-            rel="noopener"
+            href="#contact-form"
+            onClick={(e) => {
+              e.preventDefault();
+              askDemoContact("Telegram");
+              document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+              setTimeout(() => document.getElementById("contact-question")?.focus(), 350);
+            }}
           >
             <div className={`${styles.icon} ${styles.iconTg}`}>
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -69,9 +76,13 @@ export default function Contacts() {
 
           <a
             className={`${styles.card} ${styles.cardWa}`}
-            href="https://www.whatsapp.com"
-            target="_blank"
-            rel="noopener"
+            href="#contact-form"
+            onClick={(e) => {
+              e.preventDefault();
+              askDemoContact("WhatsApp");
+              document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+              setTimeout(() => document.getElementById("contact-question")?.focus(), 350);
+            }}
           >
             <div className={`${styles.icon} ${styles.iconWa}`}>
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -87,7 +98,16 @@ export default function Contacts() {
             </div>
           </a>
 
-          <a className={`${styles.card} ${styles.cardPh}`} href="tel:+995555000000">
+          <a
+            className={`${styles.card} ${styles.cardPh}`}
+            href="#contact-form"
+            onClick={(e) => {
+              e.preventDefault();
+              askDemoContact("Phone");
+              document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+              setTimeout(() => document.getElementById("contact-question")?.focus(), 350);
+            }}
+          >
             <div className={`${styles.icon} ${styles.iconPh}`}>
               <svg
                 viewBox="0 0 24 24"
