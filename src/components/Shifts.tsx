@@ -1,7 +1,5 @@
-"use client";
-
 import styles from "./Shifts.module.css";
-import { askAboutShift, askAboutProgram, askCustomStay } from "./prefill";
+import { ShiftCard, ProgramCard, CustomStayLink } from "./ShiftButtons";
 
 interface Shift {
   num: string;
@@ -159,17 +157,17 @@ export default function Shifts() {
         {/* 4 Shift Cards */}
         <div className={styles.shiftsGrid}>
           {SHIFTS.map((s) => (
-            <a
+            <ShiftCard
               key={s.num}
-              href="#contact-form"
+              name={s.name}
+              dates={s.dates}
               className={styles.shift}
-              onClick={() => askAboutShift(s.name, s.dates)}
             >
               <div className={styles.shiftNum}>{s.num}</div>
               <div className={styles.shiftDates}>{s.dates}</div>
               <div className={styles.shiftName}>{s.name}</div>
               <div className={styles.shiftDesc}>{s.desc}</div>
-            </a>
+            </ShiftCard>
           ))}
         </div>
 
@@ -186,11 +184,10 @@ export default function Shifts() {
         {/* 3 Packages */}
         <div className={styles.programs}>
           {PROGRAMS.map((p) => (
-            <a
+            <ProgramCard
               key={p.name}
-              href="#contact-form"
+              name={p.name}
               className={styles.program}
-              onClick={() => askAboutProgram(p.name)}
             >
               <div className={styles.programBody}>
                 <div className={styles.programName}>{p.name}</div>
@@ -201,7 +198,7 @@ export default function Shifts() {
                   <div className={styles.programPriceSub}>per guest, double occupancy</div>
                 </div>
               </div>
-            </a>
+            </ProgramCard>
           ))}
         </div>
 
@@ -291,11 +288,7 @@ export default function Shifts() {
               Tell us who is coming and when, and we will send a proposal.
             </div>
           </div>
-          <a
-            className={styles.travelNoteCta}
-            href="#contact-form"
-            onClick={() => askCustomStay()}
-          >
+          <CustomStayLink className={styles.travelNoteCta}>
             Ask
             <svg
               viewBox="0 0 24 24"
@@ -308,7 +301,7 @@ export default function Shifts() {
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
             </svg>
-          </a>
+          </CustomStayLink>
         </div>
       </div>
     </section>
