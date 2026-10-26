@@ -57,4 +57,5 @@ next-env.d.ts
 screenshot*.png
 *.code-workspace
 src/assets/originals-backup/
+/scratch/
 
