@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
-import WhatAwaits from "@/components/WhatAwaits";
 import Camp from "@/components/Camp";
+import WhatAwaits from "@/components/WhatAwaits";
+import Shifts from "@/components/Shifts";
 import Contacts from "@/components/Contacts";
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function Home() {
       <Hero />
       <Camp />
       <WhatAwaits />
+      <Shifts />
       <Contacts />
     </main>
   );
