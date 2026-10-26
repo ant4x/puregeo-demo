@@ -22,12 +22,10 @@
   }
 }
 
-.hamburger:hover {
-  color: var(--color-accent-hero);
-}
-
-.hamburger:active {
-  opacity: 0.7;
+@media (hover: hover) {
+  .hamburger:hover {
+    color: var(--color-accent-hero);
+  }
 }
 
 .hamburgerBox {

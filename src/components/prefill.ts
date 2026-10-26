@@ -14,8 +14,9 @@ export function askDemoContact(channelName: string) {
   if (typeof window !== "undefined") {
     window.dispatchEvent(
       new CustomEvent(PREFILL_EVENT, {
-        detail: `[Demonstration Site / Демонстрационный сайт]\nDirect ${channelName} contact is disabled because this is a demonstration showcase. All retreats, dates, and contacts shown are fictional.\n\n(Это демонстрационный сайт: прямая связь через ${channelName} не подключена, все контакты вымышленные. Вы можете проверить отправку сообщения через эту форму.)`,
+        detail: `This is a demo site. Direct ${channelName} contact is not available. All retreats, dates, and contacts shown are fictional.`,
       }),
     );
   }
 }
+

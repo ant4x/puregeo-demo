@@ -81,19 +81,30 @@ export default function Header() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const scrollToTop = () => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+    const go = () => window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    go();
+    const check = () => {
+      if (window.scrollY > 0) {
+        go();
+        requestAnimationFrame(check);
+      }
+    };
+    requestAnimationFrame(check);
+  };
+
   const handleNavClick = (href: string, e: React.MouseEvent<HTMLAnchorElement>) => {
     if (typeof document !== "undefined") {
       document.body.style.overflow = "";
     }
     closeMenu();
     if (href === "/#hero" || href === "#hero") {
-      if (typeof window !== "undefined") {
-        e.preventDefault();
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-        if (window.location.hash) {
-          window.history.replaceState(null, "", window.location.pathname);
-        }
-      }
+      e.preventDefault();
+      scrollToTop();
     }
   };
 
@@ -102,13 +113,8 @@ export default function Header() {
       document.body.style.overflow = "";
     }
     closeMenu();
-    if (typeof window !== "undefined") {
-      e.preventDefault();
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-      if (window.location.hash) {
-        window.history.replaceState(null, "", window.location.pathname);
-      }
-    }
+    e.preventDefault();
+    scrollToTop();
   };
 
   return (
