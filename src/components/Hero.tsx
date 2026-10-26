@@ -193,8 +193,8 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
       {/* Text block */}
-      <div className="absolute inset-0 flex items-end md:items-center pointer-events-none">
-        <div className="px-6 pb-20 md:pb-0 md:px-12 lg:px-20 max-w-2xl space-y-5 md:space-y-7 pointer-events-auto text-center md:text-left w-full">
+      <div className="absolute inset-x-0 top-0 h-[100svh] md:h-full flex items-end md:items-center pointer-events-none">
+        <div className="px-6 pb-8 sm:pb-12 md:pb-0 md:px-12 lg:px-20 max-w-2xl space-y-4 sm:space-y-5 md:space-y-7 pointer-events-auto text-center md:text-left w-full">
           <h1
             className="font-bold text-stone-100 leading-[1.05] tracking-tight"
             style={{ fontFamily: "var(--font-playfair)", fontSize: "var(--text-display)" }}
