@@ -8,17 +8,7 @@ import { askDemoContact } from "./prefill";
 
 const SERIF = { fontFamily: "var(--font-playfair)" } as const;
 
-const LEFT_LINKS = [
-  { href: "/#hero", label: "Home" },
-  { href: "/#camp", label: "The retreat" },
-];
-
-const RIGHT_LINKS = [
-  { href: "/#offer", label: "The week" },
-  { href: "/#contacts", label: "Contact" },
-];
-
-const ALL_MOBILE_LINKS = [
+const NAV_LINKS = [
   { href: "/#hero", label: "Home" },
   { href: "/#camp", label: "The retreat" },
   { href: "/#offer", label: "The week" },
@@ -40,7 +30,7 @@ function NavLink({
       href={href}
       onClick={onClick}
       style={SERIF}
-      className="text-sm text-ink-muted transition-colors hover:text-accent-hero"
+      className="text-sm lg:text-[0.9375rem] text-ink-muted transition-colors hover:text-accent-hero py-1 whitespace-nowrap"
     >
       {label}
     </a>
@@ -133,19 +123,12 @@ export default function Header() {
             : "-translate-y-full"
         }`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2.5 md:grid md:grid-cols-[1fr_auto_1fr]">
-          <nav className="hidden items-center gap-x-7 md:flex md:justify-self-start">
-            {LEFT_LINKS.map((l) => (
-              <NavLink key={l.href} {...l} onClick={(e) => handleNavClick(l.href, e)} />
-            ))}
-          </nav>
-
-          {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- bare <a> so the
-              anchor re-scrolls to #hero on every click (next/link short-circuits on same URL) */}
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2.5">
+          {/* Logo with Wildflower Retreats */}
           <a
             href="/"
             onClick={handleLogoClick}
-            className="flex items-center gap-2.5 text-ink"
+            className="flex items-center gap-2.5 text-ink shrink-0"
             aria-label="Wildflower Retreats — home"
           >
             <Image
@@ -157,13 +140,14 @@ export default function Header() {
               unoptimized
               className="h-9 w-auto"
             />
-            <span style={SERIF} className="text-lg leading-none md:text-xl">
-              Wildflower
+            <span style={SERIF} className="text-lg leading-none md:text-xl font-medium tracking-tight whitespace-nowrap">
+              Wildflower Retreats
             </span>
           </a>
 
-          <nav className="hidden items-center gap-x-7 md:flex md:justify-self-end">
-            {RIGHT_LINKS.map((l) => (
+          {/* Desktop Nav Links */}
+          <nav className="hidden md:flex items-center gap-x-7 lg:gap-x-9">
+            {NAV_LINKS.map((l) => (
               <NavLink key={l.href} {...l} onClick={(e) => handleNavClick(l.href, e)} />
             ))}
           </nav>
@@ -172,7 +156,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className={`${styles.hamburger} ${menuOpen ? styles.open : ""}`}
+            className={`${styles.hamburger} ${menuOpen ? styles.open : ""} md:hidden`}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
@@ -195,7 +179,7 @@ export default function Header() {
         aria-hidden={!menuOpen}
       >
         <nav className="flex flex-col gap-y-1">
-          {ALL_MOBILE_LINKS.map((link) => (
+          {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -209,14 +193,6 @@ export default function Header() {
         </nav>
 
         <div className="flex flex-col gap-3 pt-6">
-          <a
-            href="/#shifts"
-            onClick={(e) => handleNavClick("/#shifts", e)}
-            className="w-full rounded-full bg-accent-hero px-6 py-3.5 text-center text-base font-medium text-white shadow-sm transition-transform active:scale-[0.98]"
-          >
-            Book your retreat
-          </a>
-
           <div className="grid grid-cols-2 gap-3 pt-1">
             <a
               href="#contact-form"
