@@ -123,8 +123,8 @@ export default function Header() {
             : "-translate-y-full"
         }`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2.5">
-          {/* Logo with Wildflower Retreats */}
+        {/* Mobile Header bar */}
+        <div className="flex items-center justify-between px-6 py-2.5 md:hidden">
           <a
             href="/"
             onClick={handleLogoClick}
@@ -140,23 +140,16 @@ export default function Header() {
               unoptimized
               className="h-9 w-auto"
             />
-            <span style={SERIF} className="text-lg leading-none md:text-xl font-medium tracking-tight whitespace-nowrap">
+            <span style={SERIF} className="text-lg leading-none font-medium tracking-tight whitespace-nowrap">
               Wildflower Retreats
             </span>
           </a>
-
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-x-7 lg:gap-x-9">
-            {NAV_LINKS.map((l) => (
-              <NavLink key={l.href} {...l} onClick={(e) => handleNavClick(l.href, e)} />
-            ))}
-          </nav>
 
           {/* Animated Hamburger / Cross toggle button */}
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className={`${styles.hamburger} ${menuOpen ? styles.open : ""} md:hidden`}
+            className={`${styles.hamburger} ${menuOpen ? styles.open : ""}`}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
@@ -166,6 +159,42 @@ export default function Header() {
               <span className={`${styles.hamburgerLine} ${styles.line3}`} />
             </div>
           </button>
+        </div>
+
+        {/* Desktop Header bar: 2 links left, Center Logo (goes to Home), 2 links right */}
+        <div className="mx-auto hidden max-w-4xl grid-cols-[1fr_auto_1fr] items-center px-6 py-2.5 md:grid">
+          {/* Left 2 Links */}
+          <nav className="flex items-center justify-center gap-x-8 lg:gap-x-10">
+            <NavLink href="/#camp" label="The retreat" onClick={(e) => handleNavClick("/#camp", e)} />
+            <NavLink href="/#offer" label="The week" onClick={(e) => handleNavClick("/#offer", e)} />
+          </nav>
+
+          {/* Center Logo -> Home */}
+          <a
+            href="/"
+            onClick={handleLogoClick}
+            className="flex items-center justify-center gap-2.5 text-ink shrink-0 px-4 transition-opacity hover:opacity-85"
+            aria-label="Wildflower Retreats — home"
+          >
+            <Image
+              src="/assets/logotulip.svg"
+              alt=""
+              width={40}
+              height={42}
+              priority
+              unoptimized
+              className="h-9 w-auto"
+            />
+            <span style={SERIF} className="text-xl font-medium tracking-tight whitespace-nowrap">
+              Wildflower Retreats
+            </span>
+          </a>
+
+          {/* Right 2 Links */}
+          <nav className="flex items-center justify-center gap-x-8 lg:gap-x-10">
+            <NavLink href="/#shifts" label="Dates & booking" onClick={(e) => handleNavClick("/#shifts", e)} />
+            <NavLink href="/#contacts" label="Contact" onClick={(e) => handleNavClick("/#contacts", e)} />
+          </nav>
         </div>
       </header>
 
