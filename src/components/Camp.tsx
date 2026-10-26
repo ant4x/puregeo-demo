@@ -24,6 +24,7 @@ export default function Camp() {
               alt="The Black Sea coast near Batumi"
               fill
               sizes="(max-width: 960px) 100vw, 520px"
+              placeholder="blur"
             />
             <div className={styles.introBadge}>Kvariati, Adjara</div>
           </div>
