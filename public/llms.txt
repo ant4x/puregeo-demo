@@ -1,24 +1,14 @@
 # Wildflower Retreats
 
-> Small-group slow travel weeks on the Black Sea coast of Georgia.
+> Small-group slow travel weeks on the Black Sea coast of Georgia. A design and engineering portfolio demo site showcasing modern slow travel retreat experiences in Batumi.
 
-## About
-- Website: https://puregeo-demo.vercel.app
-- Focus: Slow travel retreats in and around Batumi for small groups of up to 12 guests.
-- Location: Batumi, Adjara, Georgia.
-- Season: May – October.
-- Highlights: Sea swims, mountain canyons, botanical garden, architectural walks, supra dinners, and qvevri wine tastings.
-- Note: This is a design and engineering demo site with fictional booking details.
+## Overview
+- [Home](https://puregeo-demo.vercel.app/#hero): Main landing page with full-bleed dual-layer interactive landscape
+- [The Retreat](https://puregeo-demo.vercel.app/#camp): Concept, small-group philosophy, local hosts, and accommodation
+- [The Week](https://puregeo-demo.vercel.app/#offer): 7-day slow travel program, botanical garden, mountain canyons, and supra dinners
+- [Dates & Booking](https://puregeo-demo.vercel.app/#shifts): Weekly retreat dates, package pricing, and availability
+- [Contact](https://puregeo-demo.vercel.app/#contacts): Interactive inquiry form and direct messaging
+- [Privacy Policy](https://puregeo-demo.vercel.app/rules): Demo privacy policy and data protection terms
 
-## Navigation
-- [Home](https://puregeo-demo.vercel.app/#hero): Overview and introduction
-- [The Retreat](https://puregeo-demo.vercel.app/#camp): Philosophy and hosts
-- [The Week](https://puregeo-demo.vercel.app/#offer): Program, excursions and dining
-- [Dates & Booking](https://puregeo-demo.vercel.app/#shifts): Departure dates and reservations
-- [Contact](https://puregeo-demo.vercel.app/#contacts): Get in touch
-- [Privacy Policy](https://puregeo-demo.vercel.app/rules): Data handling rules
-
-## Contact Information
-- [Contact Form](https://puregeo-demo.vercel.app/#contacts): Send a message through our site
-- [Telegram](https://t.me/anton_thinks): Inquire directly via Telegram
-- [WhatsApp](https://wa.me/79681920299): Inquire directly via WhatsApp
+## Optional
+- [Sitemap](https://puregeo-demo.vercel.app/sitemap.xml): XML sitemap listing canonical routes
