@@ -353,7 +353,7 @@
   font-size: var(--text-h3);
   font-weight: 600;
   line-height: 1;
-  color: #ff8c82;
+  color: var(--color-accent-on-dark, #ff8c82);
 }
 
 .discountText {

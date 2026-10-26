@@ -196,7 +196,7 @@
   font-size: var(--text-overline);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #ff8c82;
+  color: var(--color-accent-on-dark, #ff8c82);
   font-weight: 500;
   margin-bottom: 18px;
 }
