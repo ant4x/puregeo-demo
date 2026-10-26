@@ -25,10 +25,19 @@ const ALL_MOBILE_LINKS = [
   { href: "/#contacts", label: "Contact" },
 ];
 
-function NavLink({ href, label }: { href: string; label: string }) {
+function NavLink({
+  href,
+  label,
+  onClick,
+}: {
+  href: string;
+  label: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}) {
   return (
     <a
       href={href}
+      onClick={onClick}
       style={SERIF}
       className="text-sm text-ink-muted transition-colors hover:text-accent-hero"
     >
@@ -86,15 +95,9 @@ export default function Header() {
     if (window.location.hash) {
       window.history.replaceState(null, "", window.location.pathname);
     }
-    const go = () => window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    go();
-    const check = () => {
-      if (window.scrollY > 0) {
-        go();
-        requestAnimationFrame(check);
-      }
-    };
-    requestAnimationFrame(check);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }, 20);
   };
 
   const handleNavClick = (href: string, e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -129,7 +132,7 @@ export default function Header() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2.5 md:grid md:grid-cols-[1fr_auto_1fr]">
           <nav className="hidden items-center gap-x-7 md:flex md:justify-self-start">
             {LEFT_LINKS.map((l) => (
-              <NavLink key={l.href} {...l} />
+              <NavLink key={l.href} {...l} onClick={(e) => handleNavClick(l.href, e)} />
             ))}
           </nav>
 
@@ -157,7 +160,7 @@ export default function Header() {
 
           <nav className="hidden items-center gap-x-7 md:flex md:justify-self-end">
             {RIGHT_LINKS.map((l) => (
-              <NavLink key={l.href} {...l} />
+              <NavLink key={l.href} {...l} onClick={(e) => handleNavClick(l.href, e)} />
             ))}
           </nav>
 
