@@ -20,12 +20,25 @@ export default function Hero() {
   const touchStartPosRef = useRef<{ x: number; y: number } | null>(null);
   const touchHoldTimerRef = useRef<NodeJS.Timeout | null>(null);
   const gestureModeRef = useRef<GestureMode>("idle");
+  const bottomLoadedRef = useRef(false);
 
   useEffect(() => {
-    setLoadBottom(true);
+    if ("requestIdleCallback" in window) {
+      const handle = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
+        () => setLoadBottom(true),
+        { timeout: 3500 }
+      );
+      return () => (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(handle);
+    }
+    const timer = setTimeout(() => setLoadBottom(true), 3000);
+    return () => clearTimeout(timer);
   }, []);
 
   const applyReveal = useCallback((x: number, y: number, radius: number) => {
+    if (!bottomLoadedRef.current) {
+      setLoadBottom(true);
+      return;
+    }
     if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
     rafIdRef.current = requestAnimationFrame(() => {
       if (maskLayerRef.current) {
@@ -174,9 +187,12 @@ export default function Hero() {
             sizes="100vw"
             className="object-cover pointer-events-none select-none"
             draggable={false}
-            loading="eager"
-            placeholder="blur"
+            loading="lazy"
+            fetchPriority="low"
             quality={60}
+            onLoad={() => {
+              bottomLoadedRef.current = true;
+            }}
           />
         )}
       </div>
