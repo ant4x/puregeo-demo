@@ -2,8 +2,8 @@
 
 import { useRef, useCallback } from "react";
 import Image from "next/image";
-import heroBottom from "@/assets/puregeo-hero-2.jpg";
-import heroTop from "@/assets/puregeo-hero-1.jpg";
+import heroBottom from "@/assets/puregeo-hero-2.webp";
+import heroTop from "@/assets/puregeo-hero-1.webp";
 
 const RADIUS_DESKTOP = 280;
 const RADIUS_TOUCH = 180;
@@ -13,20 +13,34 @@ type GestureMode = "idle" | "scroll" | "reveal";
 export default function Hero() {
   const maskLayerRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const heroRectRef = useRef<DOMRect | null>(null);
+  const rafIdRef = useRef<number | null>(null);
   const lastTouchTimeRef = useRef(0);
   const touchStartPosRef = useRef<{ x: number; y: number } | null>(null);
   const touchHoldTimerRef = useRef<NodeJS.Timeout | null>(null);
   const gestureModeRef = useRef<GestureMode>("idle");
 
   const applyReveal = useCallback((x: number, y: number, radius: number) => {
-    const gradient = `radial-gradient(circle at ${x}px ${y}px, transparent ${radius * 0.72}px, black ${radius}px)`;
-    if (maskLayerRef.current) {
-      maskLayerRef.current.style.maskImage = gradient;
-      maskLayerRef.current.style.webkitMaskImage = gradient;
-    }
+    if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+    rafIdRef.current = requestAnimationFrame(() => {
+      if (maskLayerRef.current) {
+        const gradient = `radial-gradient(circle at ${x}px ${y}px, transparent ${radius * 0.72}px, black ${radius}px)`;
+        maskLayerRef.current.style.maskImage = gradient;
+        maskLayerRef.current.style.webkitMaskImage = gradient;
+      }
+      if (ringRef.current && radius === RADIUS_DESKTOP) {
+        ringRef.current.style.opacity = "1";
+        ringRef.current.style.transform = `translate(${x - RADIUS_DESKTOP}px, ${y - RADIUS_DESKTOP}px)`;
+      }
+    });
   }, []);
 
   const clearReveal = useCallback(() => {
+    heroRectRef.current = null;
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
     if (touchHoldTimerRef.current) {
       clearTimeout(touchHoldTimerRef.current);
       touchHoldTimerRef.current = null;
@@ -40,18 +54,18 @@ export default function Hero() {
     }
   }, []);
 
+  const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    heroRectRef.current = e.currentTarget.getBoundingClientRect();
+  }, []);
+
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (Date.now() - lastTouchTimeRef.current < 600) return;
 
-      const rect = e.currentTarget.getBoundingClientRect();
+      const rect = heroRectRef.current ?? e.currentTarget.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       applyReveal(x, y, RADIUS_DESKTOP);
-      if (ringRef.current) {
-        ringRef.current.style.opacity = "1";
-        ringRef.current.style.transform = `translate(${x - RADIUS_DESKTOP}px, ${y - RADIUS_DESKTOP}px)`;
-      }
     },
     [applyReveal],
   );
@@ -133,6 +147,7 @@ export default function Hero() {
       aria-label="Slow down in Georgia - Wildflower Retreats"
       className="relative h-screen h-[100lvh] min-h-[100lvh] overflow-hidden md:cursor-none select-none"
       style={{ touchAction: "pan-y" }}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={clearReveal}
       onTouchStart={handleTouchStart}

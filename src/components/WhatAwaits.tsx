@@ -3,13 +3,13 @@
 import { useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 import styles from "./WhatAwaits.module.css";
-import imgHeader from "@/assets/0-sea.jpg";
-import img1 from "@/assets/1-beaches.jpg";
-import img2 from "@/assets/2-excursions.jpg";
-import img3 from "@/assets/3-local-spa.jpg";
-import img4 from "@/assets/4-food.jpg";
-import img5 from "@/assets/5-locals.jpg";
-import img6 from "@/assets/6-cities.jpg";
+import imgHeader from "@/assets/0-sea.webp";
+import img1 from "@/assets/1-beaches.webp";
+import img2 from "@/assets/2-excursions.webp";
+import img3 from "@/assets/3-local-spa.webp";
+import img4 from "@/assets/4-food.webp";
+import img5 from "@/assets/5-locals.webp";
+import img6 from "@/assets/6-cities.webp";
 
 
 

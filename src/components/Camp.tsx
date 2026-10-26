@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./Camp.module.css";
-import imgSummer from "@/assets/summer.jpg";
-import imgSummer2 from "@/assets/summer-2.jpg";
+import imgSummer from "@/assets/summer.webp";
+import imgSummer2 from "@/assets/summer-2.webp";
 
 const WHY = [
   "Groups of no more than twelve",
@@ -76,6 +76,7 @@ export default function Camp() {
               alt="A swim in an infinity pool above the sea"
               fill
               sizes="(max-width: 960px) 100vw, 420px"
+              placeholder="blur"
             />
           </div>
           <div className={styles.whyMain}>
