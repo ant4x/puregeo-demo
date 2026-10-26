@@ -53,8 +53,9 @@
 
 .accept {
   border: none;
-  background: var(--color-accent);
-  color: var(--color-card);
+  background: var(--color-accent-hero, #DA291C);
+  color: #ffffff;
+  font-weight: 500;
 }
 
 .accept:hover {

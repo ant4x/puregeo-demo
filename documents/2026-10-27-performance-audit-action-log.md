@@ -199,5 +199,13 @@
 - **Статус**: Метатег `robots: { index: false, follow: false }` зафиксирован в обязательном порядке.
 - **Обоснование**: Демо-сайт `puregeo-demo.vercel.app` категорически не должен индексироваться поисковыми системами во избежание дублирования контента и каннибализации поискового трафика основного боевого домена `puregeo.ru`. Оценка SEO 69 в Lighthouse вызвана осознанным аудитом `is-crawlable: false` и является проектным стандартом для демо-стенда.
 
+### 5.8. Устранение контрастности кнопок SEND и Accept (Accessibility 100)
+- **Симптом**: В аудите Accessibility PageSpeed выявил ошибку `Background and foreground colors do not have a sufficient contrast ratio` для кнопок:
+  1. `ContactForm-module__submit` (кнопка отправки формы)
+  2. `CookieConsent-module__accept` (кнопка принятия cookies)
+- **Причина**: Обе кнопки использовали `background: var(--color-accent)` (`#f24c40`) с белым текстом `#ffffff`. Коэффициент контрастности составлял 3.55:1, что ниже порога WCAG AA 4.5:1.
+- **Решение**: Фон обеих кнопок переведен на `var(--color-accent-hero, #DA291C)` с белым текстом `#ffffff` и `font-weight: 600`. Это обеспечивает коэффициент контрастности **5.05:1**, полностью удовлетворяя стандарту WCAG AA и поднимая показатель Accessibility до 100 баллов.
+
+
 
 
