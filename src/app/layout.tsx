@@ -14,7 +14,14 @@ const golos = Golos_Text({
 const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  style: "normal",
+  display: "swap",
+});
+
+const loraItalic = Lora({
+  subsets: ["latin"],
+  style: "italic",
+  preload: false,
   display: "swap",
 });
 
@@ -53,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${golos.variable} ${lora.variable} h-full antialiased motion-safe:scroll-smooth`}
+      className={`${golos.variable} ${lora.variable} ${loraItalic.className} h-full antialiased motion-safe:scroll-smooth`}
     >
       <body className="min-h-full flex flex-col font-[var(--font-body)]">
         <Header />
