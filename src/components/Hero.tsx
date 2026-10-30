@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from "react";
-import Image from "next/image";
+import HeroPhoto from "@/components/HeroPhoto";
 import heroBottom from "@/assets/puregeo-hero-2.webp";
+import heroBottomPortrait from "@/assets/puregeo-hero-2-portrait.webp";
 import heroTop from "@/assets/puregeo-hero-1.webp";
+import heroTopPortrait from "@/assets/puregeo-hero-1-portrait.webp";
 
 const RADIUS_DESKTOP = 280;
 const RADIUS_TOUCH = 180;
@@ -180,16 +182,14 @@ export default function Hero() {
       {/* Bottom layer: vivid green */}
       <div className="absolute inset-0 pointer-events-none">
         {loadBottom && (
-          <Image
-            src={heroBottom}
+          <HeroPhoto
+            wide={heroBottom}
+            portrait={heroBottomPortrait}
             alt="Green mountains of Georgia"
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 75vw, 100vw"
             className="object-cover pointer-events-none select-none"
             draggable={false}
             loading="lazy"
             fetchPriority="low"
-            quality={60}
             onLoad={() => {
               bottomLoadedRef.current = true;
             }}
@@ -202,15 +202,15 @@ export default function Hero() {
         ref={maskLayerRef}
         className="absolute inset-0 pointer-events-none"
       >
-        <Image
-          src={heroTop}
+        {/* No preload: it would fetch the wide photo on phones too. A high priority starts the right one early. */}
+        <HeroPhoto
+          wide={heroTop}
+          portrait={heroTopPortrait}
           alt="Mountains of Georgia"
-          fill
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 75vw, 100vw"
           className="object-cover pointer-events-none select-none"
           draggable={false}
-          priority
-          quality={60}
+          loading="eager"
+          fetchPriority="high"
         />
       </div>
 
