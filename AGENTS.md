@@ -24,17 +24,32 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - **Inspiration**: High-end travel editorial (Condé Nast, Mr & Mrs Smith). Clean accordion layouts, full-screen heroes, large serif type.
 - **Palette** (define all in `globals.css` as CSS variables — never hardcode HEX):
 
+Brand colors, as in the brand book:
+
 | Variable | Value | Usage |
 |---|---|---|
-| `--color-accent` | `#DA291C` | Primary CTA, buttons, active highlights (Georgian Red, WCAG 5.05:1) |
-| `--color-accent-text` | `#b81d13` | Text on light surface, tags, eyebrows (WCAG AA 6.2:1) |
-| `--color-accent-on-dark` | `#ff8c82` | Accents and highlights on dark panel (discounts, eyebrows on dark, WCAG AA) |
-| `--color-panel` | `#202f18` | Dark section backgrounds |
+| `--color-accent` | `#DA291C` | Red: buttons, accents, heading italics (WCAG 5.05:1 with white) |
+| `--color-panel` | `#202f18` | Dark green: dark panels |
+| `--color-ink` | `#343d49` | Graphite: logo, headings, text |
+| `--color-ink-muted` | `#5e5853` | Warm gray: captions and secondary text |
+
+Supporting colors, derived from the brand colors for backgrounds and contrast:
+
+| Variable | Value | Usage |
+|---|---|---|
+| `--color-accent-hero` | `#DA291C` | Same red, used for links, prices and the hero heading |
+| `--color-accent-text` | `#b81d13` | Darker red for small text on the light surface (WCAG AA 6.2:1) |
+| `--color-accent-on-dark` | `#ff8c82` | Lighter red for accents on the dark panel (WCAG AA) |
+| `--color-accent-soft` | `#ee7168` | Lower stop of the hero heading gradient |
 | `--color-surface` | `#f7f5f1` | Light section backgrounds |
-| `--color-ink` | `#0f0e0c` | Primary text |
-| `--color-ink-muted` | `#6b6560` | Secondary text |
-| `--color-ink-faint` | `#9a9490` | Tertiary text, captions |
+| `--color-surface-hover` | `#f0ede8` | Hover background on light rows |
+| `--color-card` | `#ffffff` | Cards, form fields, text on red buttons |
+| `--color-ink-faint` | `#6e6761` | Tertiary text, captions |
 | `--color-border` | `#e2ddd7` | Dividers, borders |
+| `--color-telegram` | `#0088cc` | Telegram button |
+| `--color-whatsapp` | `#25d366` | WhatsApp button |
+
+Exceptions: `manifest.ts` and the Open Graph image (`opengraph-image.tsx`, reused by `twitter-image.tsx`) are rendered outside the page CSS, so they use literal color values. Translucent overlays use `rgba()`.
 
 - **Typography**:
   - Display / headings: `Lora` (serif, italic for emphasis)
@@ -81,4 +96,4 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## 6. SEO & Localization
 
 - **Standard**: Technical SEO in the DNA. Semantic HTML, Schema.org, and Metadata for every route.
-- **Market**: Russia, with russian language. GEL or RUB currency, cause tours to Georgia. (to be decided)
+- **Scope**: This repository is the English demo. The offer, prices and contacts are fictional, and every page is `noindex`.

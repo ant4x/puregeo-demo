@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
-@theme {
+@theme static {
   --color-accent: #DA291C;
   --color-accent-hero: #DA291C;
   --color-accent-text: #b81d13;
   --color-accent-on-dark: #ff8c82;
+  --color-accent-soft: #ee7168;
   --color-panel: #202f18;
   --color-surface: #f7f5f1;
+  --color-surface-hover: #f0ede8;
   --color-ink: #343d49;
   --color-ink-muted: #5e5853;
   --color-ink-faint: #6e6761;

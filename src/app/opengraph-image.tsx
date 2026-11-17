@@ -47,13 +47,12 @@ export default async function OpengraphImage() {
           padding: 80,
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logoSrc} width={340} height={356} alt="" />
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, marginTop: -30 }}>
           <div style={{ fontFamily, fontSize: 76, fontWeight: 600, letterSpacing: "-0.01em", color: "#343d49" }}>
             {TITLE}
           </div>
-          <div style={{ fontFamily, fontSize: 34, color: "#6b6560", display: "flex", gap: 10 }}>
+          <div style={{ fontFamily, fontSize: 34, color: "#5e5853", display: "flex", gap: 10 }}>
             <span>Slow travel weeks</span>
             <span style={{ color: "#DA291C" }}>on the Georgian coast</span>
           </div>
