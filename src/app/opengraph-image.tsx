@@ -47,7 +47,6 @@ export default async function OpengraphImage() {
           padding: 80,
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logoSrc} width={340} height={356} alt="" />
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, marginTop: -30 }}>
           <div style={{ fontFamily, fontSize: 76, fontWeight: 600, letterSpacing: "-0.01em", color: "#343d49" }}>

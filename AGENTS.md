@@ -81,4 +81,4 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## 6. SEO & Localization
 
 - **Standard**: Technical SEO in the DNA. Semantic HTML, Schema.org, and Metadata for every route.
-- **Market**: Russia, with russian language. GEL or RUB currency, cause tours to Georgia. (to be decided)
+- **Scope**: This repository is the English demo. The offer, prices and contacts are fictional, and every page is `noindex`.
