@@ -53,8 +53,8 @@
 
 .accept {
   border: none;
-  background: var(--color-accent-hero, #DA291C);
-  color: #ffffff;
+  background: var(--color-accent-hero);
+  color: var(--color-card);
   font-weight: 500;
 }
 

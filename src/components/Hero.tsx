@@ -242,7 +242,7 @@ export default function Hero() {
               className="bg-clip-text text-transparent inline-block pb-[0.15em]"
               style={{
                 backgroundImage:
-                  "linear-gradient(to bottom, #DA291C 40%, rgb(238, 113, 104) 100%)",
+                  "linear-gradient(to bottom, var(--color-accent-hero) 40%, var(--color-accent-soft) 100%)",
               }}
             >
               Georgia

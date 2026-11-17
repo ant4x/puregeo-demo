@@ -22,7 +22,7 @@
   font-size: var(--text-overline);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-accent-text, #b81d13);
+  color: var(--color-accent-text);
   font-weight: 600;
   margin-bottom: 14px;
 }
@@ -353,7 +353,7 @@
   font-size: var(--text-h3);
   font-weight: 600;
   line-height: 1;
-  color: var(--color-accent-on-dark, #ff8c82);
+  color: var(--color-accent-on-dark);
 }
 
 .discountText {

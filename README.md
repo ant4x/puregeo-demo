@@ -20,9 +20,9 @@ An English demo of a website I designed and built for a children's summer camp i
 - Playwright for end-to-end tests
 - Vercel
 
-## How it was built
+## Engineering process
 
-The code was written with AI coding agents (Claude Code), directed and reviewed by me under the rules in [`AGENTS.md`](AGENTS.md): design tokens instead of hard-coded colours, Server Components by default, one component per file, and every change through a branch and a pull request with a written description of what was changed and how it was checked.
+Built with Claude Code against the rules in [`AGENTS.md`](AGENTS.md): design tokens instead of hard-coded colors, Server Components by default, one component per file, and every change shipped as a pull request with a description of what changed and how it was checked.
 
 ## Run locally
 
