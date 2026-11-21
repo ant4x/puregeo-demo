@@ -16,7 +16,7 @@ export default function NotFound() {
           priority
           className="mx-auto mb-8 h-28 w-auto"
         />
-        <p className="mb-3 text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-accent">
+        <p className="mb-3 text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-accent-text">
           404 · page not found
         </p>
         <h1

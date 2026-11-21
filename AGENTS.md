@@ -11,7 +11,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## 1. Project Philosophy & Tone
 
 - **Visual Goal**: Premium editorial travel feel with genuine warmth. The visitor should sense the heat of Georgia, trust the expertise, and want to book immediately.
-- **Positioning**: Family-oriented summer language camp in Batumi for children 6–11. High-quality experience at a fair price — not budget, not luxury, but thoughtful and trustworthy.
+- **Positioning**: Family-oriented summer language camp in Batumi for children 5-14. High-quality experience at a fair price — not budget, not luxury, but thoughtful and trustworthy.
 - **Expertise**: Experienced local guides and teachers.
 - **Tone**: Professional, high hospitality orientation, welcoming and warm.
 
@@ -28,7 +28,7 @@ Brand colors, as in the brand book:
 
 | Variable | Value | Usage |
 |---|---|---|
-| `--color-accent` | `#DA291C` | Red: buttons, accents, heading italics (WCAG 5.05:1 with white) |
+| `--color-accent` | `#DA291C` | Red: buttons, accents, heading italics (WCAG 4.87:1 with white) |
 | `--color-panel` | `#202f18` | Dark green: dark panels |
 | `--color-ink` | `#343d49` | Graphite: logo, headings, text |
 | `--color-ink-muted` | `#5e5853` | Warm gray: captions and secondary text |
@@ -38,7 +38,7 @@ Supporting colors, derived from the brand colors for backgrounds and contrast:
 | Variable | Value | Usage |
 |---|---|---|
 | `--color-accent-hero` | `#DA291C` | Same red, used for links, prices and the hero heading |
-| `--color-accent-text` | `#b81d13` | Darker red for small text on the light surface (WCAG AA 6.2:1) |
+| `--color-accent-text` | `#b81d13` | Darker red for small text on the light surface (WCAG AA 5.98:1 on the cream surface) |
 | `--color-accent-on-dark` | `#ff8c82` | Lighter red for accents on the dark panel (WCAG AA) |
 | `--color-accent-soft` | `#ee7168` | Lower stop of the hero heading gradient |
 | `--color-surface` | `#f7f5f1` | Light section backgrounds |

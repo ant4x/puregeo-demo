@@ -81,7 +81,7 @@ export default function RulesPage() {
   return (
     <main className="flex-1 bg-surface">
       <div className="mx-auto max-w-3xl px-6 pb-24 pt-28">
-        <p className="mb-5 text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-accent">
+        <p className="mb-5 text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-accent-text">
           Documents
         </p>
         <h1
