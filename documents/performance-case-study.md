@@ -8,7 +8,7 @@ The same code runs in two places: this demo on Vercel (serverless, global CDN) a
 
 - Production, mobile Performance: from 76 to 98. Desktop: from 60 to 99.
 - Production, loading a photo: from 15-17 s to 0.2 s, with no errors or timeouts left in the PageSpeed report.
-- Production, desktop on October 31: Performance 99, Accessibility 100, Best Practices 100, SEO 100. This demo scores 100 for Performance.
+- Production, desktop on October 31: Performance 99, Accessibility 100, Best Practices 100, SEO 100. This demo on November 21: Performance 100 on desktop and 97 on mobile.
 - SEO: 100 in production. This demo shows 69 by design, because every page is `noindex` so it never competes with the production site in search.
 
 ## Main thread
