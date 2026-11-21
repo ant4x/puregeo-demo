@@ -1,6 +1,6 @@
 # Wildflower Retreats
 
-An English demo of a website I made for a kids' summer camp package in Batumi, Georgia, together with the package's name, brand and copy, in about a week of focused work; a designer finished the logo by hand. Later I made the production site fast: PageSpeed on mobile went from 76 to 98, and a photo now loads in 0.2 s instead of 15-17 s.
+An English demo of the Strana Tsvetov website, which I made for a kids' summer camp package in Batumi, Georgia, together with the package's name, brand and copy, in about a week of focused work; a designer finished the logo by hand. Later I made the production site fast: PageSpeed on mobile went from 76 to 98, and a photo now loads in 0.2 s instead of 15-17 s.
 
 The demo keeps the production site's layout and code and swaps the copy for a fictional offer: a small-group travel week with made-up prices and contacts.
 
