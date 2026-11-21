@@ -28,7 +28,7 @@ Brand colors, as in the brand book:
 
 | Variable | Value | Usage |
 |---|---|---|
-| `--color-accent` | `#DA291C` | Red: buttons, accents, heading italics (WCAG 5.05:1 with white) |
+| `--color-accent` | `#DA291C` | Red: buttons, accents, heading italics (WCAG 4.87:1 with white) |
 | `--color-panel` | `#202f18` | Dark green: dark panels |
 | `--color-ink` | `#343d49` | Graphite: logo, headings, text |
 | `--color-ink-muted` | `#5e5853` | Warm gray: captions and secondary text |
@@ -38,7 +38,7 @@ Supporting colors, derived from the brand colors for backgrounds and contrast:
 | Variable | Value | Usage |
 |---|---|---|
 | `--color-accent-hero` | `#DA291C` | Same red, used for links, prices and the hero heading |
-| `--color-accent-text` | `#b81d13` | Darker red for small text on the light surface (WCAG AA 6.2:1) |
+| `--color-accent-text` | `#b81d13` | Darker red for small text on the light surface (WCAG AA 5.98:1 on the cream surface) |
 | `--color-accent-on-dark` | `#ff8c82` | Lighter red for accents on the dark panel (WCAG AA) |
 | `--color-accent-soft` | `#ee7168` | Lower stop of the hero heading gradient |
 | `--color-surface` | `#f7f5f1` | Light section backgrounds |
