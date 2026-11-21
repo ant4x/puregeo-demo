@@ -77,7 +77,7 @@ The full investigation, with each cause confirmed or ruled out: [`documents/perf
 
 ## How it was built
 
-I led the work end to end and used AI coding agents as tools: Claude Code, OpenAI Codex and Google Antigravity. [`AGENTS.md`](AGENTS.md) holds the rules they work to: design tokens instead of hard-coded colors, Server Components by default, and a branch and a pull request for each change, with a description of what changed and how it was checked. The history has 37 merged pull requests.
+I led the work end to end and used AI coding agents as tools: Claude Code, OpenAI Codex and Google Antigravity. [`AGENTS.md`](AGENTS.md) holds the rules they work to: design tokens instead of hard-coded colors, Server Components by default, and a branch and a pull request for each change, with a description of what changed and how it was checked. The merged pull requests are [listed on GitHub](https://github.com/ant4x/puregeo-demo/pulls?q=is%3Apr+is%3Amerged).
 
 ## Run locally
 

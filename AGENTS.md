@@ -11,7 +11,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## 1. Project Philosophy & Tone
 
 - **Visual Goal**: Premium editorial travel feel with genuine warmth. The visitor should sense the heat of Georgia, trust the expertise, and want to book immediately.
-- **Positioning**: Family-oriented summer language camp in Batumi for children 6–11. High-quality experience at a fair price — not budget, not luxury, but thoughtful and trustworthy.
+- **Positioning**: Family-oriented summer language camp in Batumi for children 5-14. High-quality experience at a fair price — not budget, not luxury, but thoughtful and trustworthy.
 - **Expertise**: Experienced local guides and teachers.
 - **Tone**: Professional, high hospitality orientation, welcoming and warm.
 
