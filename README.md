@@ -65,7 +65,7 @@ The full investigation, with each cause confirmed or ruled out: [`documents/perf
 - The production site is the camp's Russian-language page. Its repository is private.
 - Only production has four things: the form's delivery to Telegram, behind a captcha, a per-IP rate limit and a duplicate check; WebP-only images; the build step that cuts every photo in advance; and an analytics script.
 - In the demo, `/api/contact` validates the form and discards it: nothing is stored or sent. The Telegram, WhatsApp and phone buttons open no chat; they put a note in the form that the contacts are fictional.
-- Every page and file is sent with `noindex`, and robots.txt leaves crawling open so search engines can read it: a page blocked in robots.txt can still show up in search as a bare link. The demo stays out of search results and does not compete with the production site.
+- Every page and file is sent with `noindex`, and robots.txt leaves crawling open to search engines so they can read it: a page blocked in robots.txt can still show up in search as a bare link. AI search and training bots, which do not all document support for `noindex`, are blocked in robots.txt. The demo stays out of search results and does not compete with the production site.
 
 ## Stack
 

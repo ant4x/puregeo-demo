@@ -1,5 +1,18 @@
-# Crawling stays open so search engines can read the noindex rule on every page.
+# Search engines read the noindex on every page, so crawling stays open for them.
 User-agent: *
 Allow: /
+
+# AI search and training bots do not all document support for noindex, so they are kept out.
+User-agent: OAI-SearchBot
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: meta-webindexer
+User-agent: meta-externalagent
+User-agent: CCBot
+Disallow: /
 
 Sitemap: https://puregeo-demo.vercel.app/sitemap.xml
