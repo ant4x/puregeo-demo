@@ -12,11 +12,18 @@ const RADIUS_TOUCH = 180;
 
 type GestureMode = "idle" | "scroll" | "reveal";
 
+/** A cursor point inside the hero: its box is read once, and the page may have scrolled since. */
+function pointInHero(clientX: number, clientY: number, rect: DOMRect, scrollYAtRead: number) {
+  return { x: clientX - rect.left, y: clientY - rect.top + window.scrollY - scrollYAtRead };
+}
+
 export default function Hero() {
   const [loadBottom, setLoadBottom] = useState(false);
   const maskLayerRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const heroRectRef = useRef<DOMRect | null>(null);
+  const rectScrollYRef = useRef(0);
+  const cursorRef = useRef<{ x: number; y: number } | null>(null);
   const rafIdRef = useRef<number | null>(null);
   const lastTouchTimeRef = useRef(0);
   const touchStartPosRef = useRef<{ x: number; y: number } | null>(null);
@@ -57,6 +64,7 @@ export default function Hero() {
 
   const clearReveal = useCallback(() => {
     heroRectRef.current = null;
+    cursorRef.current = null;
     if (rafIdRef.current) {
       cancelAnimationFrame(rafIdRef.current);
       rafIdRef.current = null;
@@ -77,6 +85,7 @@ export default function Hero() {
   const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     setLoadBottom(true);
     heroRectRef.current = e.currentTarget.getBoundingClientRect();
+    rectScrollYRef.current = window.scrollY;
   }, []);
 
   const handleMouseMove = useCallback(
@@ -84,13 +93,28 @@ export default function Hero() {
       if (Date.now() - lastTouchTimeRef.current < 600) return;
       setLoadBottom(true);
 
-      const rect = heroRectRef.current ?? e.currentTarget.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      if (!heroRectRef.current) {
+        heroRectRef.current = e.currentTarget.getBoundingClientRect();
+        rectScrollYRef.current = window.scrollY;
+      }
+      cursorRef.current = { x: e.clientX, y: e.clientY };
+      const { x, y } = pointInHero(e.clientX, e.clientY, heroRectRef.current, rectScrollYRef.current);
       applyReveal(x, y, RADIUS_DESKTOP);
     },
     [applyReveal],
   );
+
+  useEffect(() => {
+    const followScroll = () => {
+      const rect = heroRectRef.current;
+      const cursor = cursorRef.current;
+      if (!rect || !cursor) return;
+      const { x, y } = pointInHero(cursor.x, cursor.y, rect, rectScrollYRef.current);
+      applyReveal(x, y, RADIUS_DESKTOP);
+    };
+    window.addEventListener("scroll", followScroll, { passive: true });
+    return () => window.removeEventListener("scroll", followScroll);
+  }, [applyReveal]);
 
   const handleTouchStart = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {

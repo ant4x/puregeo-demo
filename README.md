@@ -93,7 +93,7 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-The suite sends a question through the contact form on desktop and mobile viewports and checks that the API rejects an invalid email.
+The suite runs on desktop and mobile viewports. It sends a question through the contact form and checks that the API rejects an invalid email, that the lens stays under the cursor when the page scrolls (desktop only), and that a shared link to the privacy policy previews that page.
 
 ## Author
 
