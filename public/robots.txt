@@ -1,4 +1,5 @@
+# Crawling stays open so search engines can read the noindex rule on every page.
 User-agent: *
-Disallow: /
+Allow: /
 
 Sitemap: https://puregeo-demo.vercel.app/sitemap.xml

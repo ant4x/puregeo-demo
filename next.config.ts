@@ -27,6 +27,11 @@ const nextConfig: NextConfig = {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
           },
+          // The demo stays out of search: pages, images and every other file.
+          {
+            key: "X-Robots-Tag",
+            value: "noindex",
+          },
         ],
       },
       {
